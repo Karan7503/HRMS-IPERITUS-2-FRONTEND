@@ -1,0 +1,137 @@
+:root {
+
+  /* softGray */
+
+  --primary: 79 124 255;          
+  --primary-hover: 59 102 224;    
+
+  --bg-main: 243 244 246;         
+  --bg-card: 255 255 255;         
+
+  --text-main: 31 41 55;          
+
+  --border-color: 229 231 235;    
+
+}
+
+[data-theme="softBlue"] {
+
+  --primary: 79 124 255;          
+  --primary-hover: 59 102 224;    
+  --bg-main: 245 247 251;        
+  --bg-card: 255 255 255;         
+
+  --text-main: 31 41 55;          
+
+  --border-color: 229 231 235;    
+}
+
+[data-theme="mintGreen"] {
+
+  --primary: 58 191 175;          
+  --primary-hover: 45 168 154;    
+
+  --bg-main: 242 251 249;         
+  --bg-card: 255 255 255;         
+
+  --text-main: 17 24 39;           
+
+  --border-color: 209 250 229;    
+}
+
+[data-theme="softLavender"] {
+  --primary: 124 131 253;         
+  --primary-hover: 99 102 241;    
+
+  --bg-main: 247 245 255;         
+  --bg-card: 255 255 255;         
+
+  --text-main: 31 41 55;
+
+  --border-color: 233 231 255;    
+}
+
+[data-theme="Flame"] {
+
+  --primary: 249 115 22;          
+  --primary-hover: 234 88 12;     
+
+  --bg-main: 255 247 237;          
+  --bg-card: 255 255 255;         
+
+  --text-main: 28 25 23;          
+
+  --border-color: 254 215 170;    
+}
+
+
+/* dark theme */
+[data-theme="dark"] {
+
+  /* dark-graphite */
+
+  --primary: 99 102 241;          
+  --primary-hover: 79 70 229;
+
+  --bg-main: 24 24 27;            
+  --bg-card: 39 39 42;
+
+  --text-main: 244 244 245;
+
+  --border-color: 63 63 70;
+
+}
+
+/* ========================
+   CUSTOM UTILITIES
+======================== */
+
+.bg-bgMain {
+  background-color: rgb(var(--bg-main));
+}
+
+.bg-bgCard {
+  background-color: rgb(var(--bg-card));
+}
+
+.text-textMain {
+  color: rgb(var(--text-main));
+}
+
+.border-borderColor {
+  border-color: rgb(var(--border-color));
+}
+
+.bg-primary {
+  background-color: rgb(var(--primary));
+}
+
+.hover\:bg-primaryHover:hover {
+  background-color: rgb(var(--primary-hover));
+}
+
+.hover\:text-primary:hover {
+  color: rgb(var(--primary));
+}
+
+.hover\:bg-primarySoft:hover {
+  background-color: rgb(var(--primary) / 0.20);
+}
+
+.bg-primarySoft {
+  background-color: rgb(var(--primary) / 0.12);
+}
+
+.bg-primaryGradient {
+
+  background: linear-gradient(
+    135deg,
+    rgb(var(--primary)),
+    rgb(var(--primary-hover))
+  );
+
+}
+
+.bg-rowAlt {
+  background-color: rgb(var(--primary) / 0.06);
+}

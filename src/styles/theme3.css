@@ -1,0 +1,224 @@
+:root {
+
+/* DEFAULT — Neutral Blue SaaS */
+
+--primary: 79 124 255;
+--primary-hover: 59 102 224;
+
+--bg-main: 248 250 252;     /* lighter, cleaner */
+--bg-card: 255 255 255;
+
+--text-main: 30 41 59;      /* slightly softer */
+--text-muted: 100 116 139;
+
+--border-color: 226 232 240;
+
+/* status colors */
+--success: 34 197 94;
+--success-bg: 220 252 231;
+
+--danger: 239 68 68;
+--danger-bg: 254 226 226;
+
+--warning: 245 158 11;
+--warning-bg: 254 243 199;
+}
+
+
+[data-theme="softBlue"] {
+
+--primary: 59 130 246;
+--primary-hover: 37 99 235;
+
+--bg-main: 246 249 255;
+--bg-card: 255 255 255;
+
+--text-main: 30 41 59;
+--text-muted: 100 116 139;
+
+--border-color: 219 234 254;
+
+--success: 16 185 129;
+--success-bg: 209 250 229;
+
+--danger: 239 68 68;
+--danger-bg: 254 226 226;
+}
+
+
+[data-theme="mintGreen"] {
+
+--primary: 16 185 129;
+--primary-hover: 5 150 105;
+
+--bg-main: 240 253 250;
+--bg-card: 255 255 255;
+
+--text-main: 22 28 36;
+--text-muted: 100 116 139;
+
+--border-color: 167 243 208;
+
+--success: 5 150 105;
+--success-bg: 209 250 229;
+
+--danger: 220 38 38;
+--danger-bg: 254 226 226;
+}
+
+
+[data-theme="softLavender"] {
+
+--primary: 124 131 253;
+--primary-hover: 99 102 241;
+
+--bg-main: 245 243 255;
+--bg-card: 255 255 255;
+
+--text-main: 30 27 75;
+--text-muted: 120 113 170;
+
+--border-color: 221 214 254;
+
+--success: 34 197 94;
+--success-bg: 220 252 231;
+
+--danger: 239 68 68;
+--danger-bg: 254 226 226;
+}
+
+
+[data-theme="Flame"] {
+
+--primary: 249 115 22;
+--primary-hover: 234 88 12;
+
+--bg-main: 255 247 237;
+--bg-card: 255 255 255;
+
+--text-main: 28 25 23;
+--text-muted: 120 113 108;
+
+--border-color: 254 215 170;
+
+--success: 22 163 74;
+--success-bg: 220 252 231;
+
+--danger: 220 38 38;
+--danger-bg: 254 226 226;
+}
+
+[data-theme="dark"] {
+
+  --primary: 99 102 241;
+  --primary-hover: 79 70 229;
+
+  /* neutral dark (no blue tint) */
+  --bg-main: 24 24 27;
+  --bg-card: 39 39 42;
+
+  --text-main: 244 244 245;
+  --text-muted: 161 161 170;
+
+  --border-color: 63 63 70;
+
+  /* status colors (adjusted for dark bg) */
+  --success: 74 222 128;
+  --success-bg: 20 83 45;
+
+  --danger: 248 113 113;
+  --danger-bg: 69 10 10;
+
+  --warning: 251 191 36;
+  --warning-bg: 92 51 23;
+}
+
+
+
+/* ========================
+   CUSTOM UTILITIES
+======================== */
+
+.bg-bgMain {
+  background-color: rgb(var(--bg-main));
+}
+
+.bg-bgCard {
+  background-color: rgb(var(--bg-card));
+}
+
+.text-textMain {
+  color: rgb(var(--text-main));
+}
+
+.border-borderColor {
+  border-color: rgb(var(--border-color));
+}
+
+/* stronger table border */
+.border-strong {
+  border-color: rgb(var(--primary) / 0.70);
+}
+
+.bg-primary {
+  background-color: rgb(var(--primary));
+}
+
+.hover\:bg-primaryHover:hover {
+  background-color: rgb(var(--primary-hover));
+}
+
+.hover\:text-primary:hover {
+  color: rgb(var(--primary));
+}
+
+.hover\:bg-primarySoft:hover {
+  background-color: rgb(var(--primary) / 0.20);
+}
+
+.bg-primarySoft {
+  background-color: rgb(var(--primary) / 0.12);
+}
+
+.bg-primaryGradient {
+
+  background: linear-gradient(
+    135deg,
+    rgb(var(--primary)),
+    rgb(var(--primary-hover))
+  );
+
+}
+
+
+
+/* table styles */
+.bg-tableHeader {
+  background-color: rgb(var(--primary) / 0.08);
+}
+
+.bg-rowAlt {
+  background-color: rgb(var(--primary) / 0.05);
+}
+
+.text-muted {
+  color: rgb(var(--text-muted));
+}
+
+/* status badges */
+.badge-success {
+  background-color: rgb(var(--success-bg));
+  color: rgb(var(--success));
+}
+
+.badge-danger {
+  background-color: rgb(var(--danger-bg));
+  color: rgb(var(--danger));
+}
+
+/* soft card shadow */
+.card-soft {
+  box-shadow:
+    0 1px 2px rgba(0,0,0,0.04),
+    0 4px 12px rgba(0,0,0,0.06);
+}
