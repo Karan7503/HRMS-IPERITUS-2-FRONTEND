@@ -1,233 +1,223 @@
 import DataTable from "../../ui/DataTable";
+
 import {
   Calendar,
   Clock,
   Timer,
-  CheckCircle2,
-  XCircle,
   Eye,
   Pencil
 } from "lucide-react";
-
-function StatusBadge({ status }) {
-
-  const styles = {
-
-    Present: `
-      bg-primarySoft
-      text-primary
-    `,
-
-   
-    Absent: `
-      bg-primarySoft
-      text-textMain
-      opacity-70
-    `
-  };
-
-  return (
-
-    <span
-      className={`
-        px-2.5
-        py-1
-
-        text-xs
-        font-medium
-
-        rounded-md
-
-        ${styles[status]}
-      `}
-    >
-
-      {status}
-
-    </span>
-
-  );
-
-}
 
 
 function AttendanceTable({ data = [] }) {
 
   const columns = [
 
-    // {
-    //   accessorKey: "date",
-    //   header: "Date",
-    //   cell: ({ row }) => (
+{
+  accessorKey: "date",
 
-    //     <span className="font-medium">
+  header: () => (
 
-    //       {row.original.date}
+    <div className="flex items-center gap-2">
 
-    //     </span>
+      {/* <Calendar size={14}/> */}
+      Date
 
-    //   )
-    // },
+    </div>
 
-        {
-      accessorKey: "date",
-      header: () => (
+  ),
 
-        <div className="flex items-center gap-2">
+  size: 140
 
-          <Calendar size={14}/>
+},
 
-          Date
+{
+  accessorKey: "status",
 
-        </div>
+  header: () => (
 
-      )
-    },
+    <div className="text-center">
+      Status
+    </div>
 
+  ),
 
-    {
-      accessorKey: "status",
-      header: "Status",
-       cell: ({ row }) => {
+  size: 120,
 
-        const value = row.original.status;
-        
-        // const badgeClass =
-        // value === "Present"
-        //   ? `
-        //     bg-successSoft
-        //     text-success
-        //     border
-        //     border-success/20
-        //   `
-        //   : `
-        //     bg-dangerSoft
-        //     text-danger
-        //     border
-        //     border-danger/20
-        //   `;
+  cell: ({ row }) => {
 
-        const badgeClass =
-        value === "Present"
-          ? "badge-success"
-          : "badge-danger";
+    const value = row.original.status;
 
-        return (
-
-          <span
-            className={`
-              inline-flex
-              items-center
-              gap-1
-
-              px-2.5
-              py-1
-
-              text-xs
-              font-medium
-
-              rounded-full
-
-              ${badgeClass}
-            `}
-          >
-            {value}
-          </span>
-        );
-      }
-    },
-
-    // {
-    //   accessorKey: "inTime",
-    //   header: "Time In"
-    // },
-
-    {
-      accessorKey: "inTime",
-      header: () => (
-
-        <div className="flex items-center gap-2">
-
-          <Clock size={14}/>
-
-          Time In
-
-        </div>
-
-      )
-    },
-
-    {
-      accessorKey: "outTime",
-      header: "Time Out"
-    },
-
-    // {
-    //   accessorKey: "hours",
-    //   header: "Hours"
-    // }
-
-    {
-      accessorKey: "hours",
-      header: () => (
-
-        <div className="flex items-center gap-2">
-          <Timer size={14}/>
-          Hours
-        </div>
-      )
-    },
+    const badgeClass =
+  value === "Present"
+    ? "badge-success"
+    : value === "Absent"
+    ? "badge-danger"
+    : value === "Late"
+    ? "badge-warning"
+    : value === "Holiday"
+    ? "badge-neutral"
+    : "badge-neutral";
 
 
-    ////////////////////////////
+    return (
 
-     {
-    id: "actions",
+      <div className="flex justify-center">
 
-    header: "Actions",
+        <span
+          className={`
+            min-w-[85px]
 
-    cell: () => (
+            px-2 py-1
 
-      <div className="flex gap-2">
+            text-xs
+            font-medium
 
-        <button
-          className="
-            p-1.5
-            rounded-md
-            bg-primarySoft
-            hover:bg-primarySoft/70
-            transition
-          "
+            rounded-full
+
+            text-center
+
+            ${badgeClass}
+          `}
         >
-          <Eye size={14}/>
-        </button>
 
-        <button
-          className="
-            p-1.5
-            rounded-md
-            bg-warningSoft
-            hover:bg-warningSoft/70
-            transition
-          "
-        >
-          <Pencil size={14}/>
-        </button>
+          {value}
+
+        </span>
 
       </div>
 
-    )
+    );
+
   }
 
+},
 
-  ];
+{
+  accessorKey: "inTime",
+
+  header: () => (
+
+    <div className="flex items-center justify-center gap-2">
+
+      {/* <Clock size={14}/> */}
+      Time In
+
+    </div>
+
+  ),
+
+  size: 110,
+
+  cell: ({ row }) => (
+
+    <div className="text-center tabular-nums">
+
+      {row.original.inTime}
+
+    </div>
+
+  )
+
+},
+
+{
+  accessorKey: "outTime",
+
+  header: () => (
+
+    <div className="text-center">
+      {/* <Clock size={14}/> */}
+      Time Out
+    </div>
+
+  ),
+
+  size: 110,
+
+  cell: ({ row }) => (
+
+    <div className="text-center tabular-nums">
+
+      {row.original.outTime}
+
+    </div>
+
+  )
+
+},
+
+{
+  accessorKey: "hours",
+
+  header: () => (
+
+    <div className="flex items-center justify-center gap-2">
+
+      {/* <Timer size={14}/> */}
+      Hours
+
+    </div>
+
+  ),
+
+  size: 80,
+
+  cell: ({ row }) => (
+
+    <div className="text-center font-medium tabular-nums">
+
+      {row.original.hours}
+
+    </div>
+
+  )
+
+},
+
+{
+  id: "actions",
+
+  header: () => (
+
+    <div className="text-center">
+      Actions
+    </div>
+
+  ),
+
+  size: 100,
+
+  cell: () => (
+
+    <div className="flex justify-center gap-2">
+
+      <button className="icon-btn">
+
+        <Eye size={14}/>
+
+      </button>
+
+      <button className="icon-btn">
+
+        <Pencil size={14}/>
+
+      </button>
+
+    </div>
+
+  )
+
+}
+
+];
+
 
   return (
 
     <DataTable
       data={data}
       columns={columns}
-      emptyMessage="No attendance found"
     />
 
   );

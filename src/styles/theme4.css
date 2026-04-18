@@ -1,34 +1,38 @@
 :root {
 
-/* DEFAULT — Neutral Blue SaaS */
+/* SOFT HANDSONTABLE STYLE  109 40 217*/
 
---primary: 79 124 255;
---primary-hover: 59 102 224;
+--primary: 121, 179, 176;        /* softer violet-700 */
+--primary-hover: 91 33 182;   /* slightly darker */
 
---bg-main: 248 250 252;     /* lighter, cleaner */
+/* background should be WHITE */
+--bg-main: 255 255 255;      
+
+/* cards slightly separated */
 --bg-card: 255 255 255;
 
---text-main: 30 41 59;      /* slightly softer */
---text-muted: 100 116 139;
+/* text */
+--text-main: 17 24 39;        /* gray-900 */
+--text-muted: 107 114 128;    /* gray-500 */
 
---border-color: 226 232 240;
+/* borders subtle */
+--border-color: 229 231 235;  /* gray-200 */
 
-/* status colors */
-/* --success: 34 197 94;
---success-bg: 220 252 231;
 
---danger: 239 68 68;
---danger-bg: 254 226 226;
+/* status */
+--success-strong: 34 197 94;
+--success-soft: 220 252 231;
 
---warning: 245 158 11;
---warning-bg: 254 243 199; */
---success-strong: 22 163 74;      /* green-600 */
---success-soft: 220 252 231;      /* green-100 */
+--danger-strong: 239 68 68;
+--danger-soft: 254 226 226;
 
---danger-strong: 220 38 38;       /* red-600 */
---danger-soft: 254 226 226;       /* red-100 */
+
 }
 
+body {
+  background: rgb(var(--bg-main));
+  color: rgb(var(--text-main));
+}
 
 [data-theme="softBlue"] {
 
@@ -161,8 +165,11 @@
 }
 
 /* stronger table border */
-.border-strong {
+/* .border-strong {
   border-color: rgb(var(--primary) / 0.70);
+} */
+ .border-strong {
+  border-color: rgb(var(--border-color)/0.45);
 }
 
 .bg-primary {
@@ -185,7 +192,7 @@
   background-color: rgb(var(--primary) / 0.12);
 }
 
-.bg-primaryGradient {
+/* .bg-primaryGradient {
 
   background: linear-gradient(
     135deg,
@@ -193,18 +200,35 @@
     rgb(var(--primary-hover))
   );
 
+} */
+
+.bg-primaryGradient {
+  background: linear-gradient(
+    135deg,
+    rgb(var(--primary)),
+    rgb(var(--primary-hover))
+  );
 }
 
 
 
 /* table styles */
-.bg-tableHeader {
+
+
+/* .bg-tableHeader {
   background-color: rgb(var(--primary) / 0.08);
+} */
+.bg-tableHeader {
+  background-color: rgb(248 250 252);
 }
 
-.bg-rowAlt {
+/* .bg-rowAlt {
   background-color: rgb(var(--primary) / 0.05);
+} */
+.bg-rowAlt {
+  background-color: rgb(249 250 251);
 }
+
 
 .text-muted {
   color: rgb(var(--text-muted));
@@ -240,22 +264,163 @@
 
 /* GLOBAL BADGES */
 
-.badge-success {
 
+
+
+/* PAGE LAYOUT */
+
+.responsive-page{
+  padding:16px;
+}
+
+@media (min-width:640px){
+  .responsive-page{
+    padding-left:24px;
+    padding-right:24px;
+  }
+}
+
+@media (min-width:1024px){
+  .responsive-page{
+    padding-left:40px;
+    padding-right:40px;
+  }
+}
+
+@media (min-width:1280px){
+  .responsive-page{
+    padding-left:56px;
+    padding-right:56px;
+  }
+}
+
+
+/* GRID LAYOUT */
+
+.responsive-grid{
+  display:grid;
+  gap:24px;
+}
+
+@media (min-width:1024px){
+  .responsive-grid{
+    grid-template-columns: 1fr 280px;
+  }
+}
+
+
+/* BADGE COLORS */
+
+/* .badge-success {
   background-color: rgb(var(--success-strong));
-
   color: white;
-
   border: 1px solid rgb(var(--success-strong));
-
 }
 
 .badge-danger {
-
   background-color: rgb(var(--danger-strong));
-
   color: white;
-
   border: 1px solid rgb(var(--danger-strong));
+}
 
+.badge-warning{
+  background-color: #f8a202;   
+  color: white; 
+  border: 1px solid #f8a202;   
+}
+
+.badge-neutral{
+  background-color: grey;   
+  color: white;              
+  border: 1px solid gray;   
+}  */
+ 
+.badge-success {
+  background: rgba(34,197,94,0.10);
+  border: 1px solid rgba(34,197,94,0.4);
+  color: rgb(34,197,94);
+}
+
+
+.badge-danger {
+  background: rgba(239,68,68,0.10);
+  border: 1px solid rgba(239,68,68,0.45);
+  color: rgb(239,68,68);
+}
+
+.badge-warning{
+ background: rgba(245,158,11,0.10);
+  border: 1px solid rgba(245,158,11,0.45);
+  color: rgb(245,158,11);
+}
+
+.badge-neutral{
+ background: rgba(120,120,120,0.08);
+  border: 1px solid rgba(120,120,120,0.25);
+  /* color: rgb(var(--textMain)); */
+  color: rgb(239,68,68);
+  
+} 
+
+/* SUMMARY COLORS */
+
+.summary-neutral {
+  background: rgba(120,120,120,0.08);
+  border: 1px solid rgba(120,120,120,0.25);
+  /* color: rgb(var(--textMain)); */
+  color: rgb(239,68,68);
+
+}
+
+.summary-success {
+  background: rgba(34,197,94,0.10);
+  border: 1px solid rgba(34,197,94,0.4);
+  color: rgb(34,197,94);
+}
+
+.summary-danger {
+  background: rgba(239,68,68,0.10);
+  border: 1px solid rgba(239,68,68,0.45);
+  color: rgb(239,68,68);
+}
+
+.summary-warning {
+  background: rgba(245,158,11,0.10);
+  border: 1px solid rgba(245,158,11,0.45);
+  color: rgb(245,158,11);
+}
+
+.summary-primary {
+  background: rgba(59,130,246,0.10);
+  border: 1px solid rgba(59,130,246,0.45);
+  color: rgb(59,130,246);
+}
+.summary-primary {
+  background: rgba(109,40,217,0.08);
+  border: 1px solid rgba(109,40,217,0.20);
+  color: rgb(109,40,217);
+}
+
+/* STICKY */
+.bg-Sticky{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(6px);
+  background: rgb(var(--bg-card) / 0.95);
+}
+
+.bg-StickyBreadcrumb{
+  position: sticky;
+  top: 64px;
+  z-index: 40;
+  background: rgb(var(--bg-main));
+}
+
+.bg-StickyTableHeader{
+  position: sticky;
+  top: 120px;   /* navbar + breadcrumb height */
+  z-index: 30;
+  background: rgb(248 250 252);
+  border-bottom: 1px solid rgb(var(--border-color));
 }

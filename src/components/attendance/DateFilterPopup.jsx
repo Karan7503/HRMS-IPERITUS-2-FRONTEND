@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import { SlidersHorizontal } from "lucide-react";
-
 import GetAttendance from "./GetAttendance";
 
 function DateFilterPopup({
@@ -11,19 +10,17 @@ function DateFilterPopup({
 
   const [open, setOpen] = useState(false);
 
-  const ref = useRef();
+  const wrapperRef = useRef(null);
 
-
-  /* close when clicking outside */
 
   useEffect(() => {
 
-    function handleClickOutside(e){
+    function handleClickOutside(e) {
 
-      if(
-        ref.current &&
-        !ref.current.contains(e.target)
-      ){
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(e.target)
+      ) {
 
         setOpen(false);
 
@@ -31,99 +28,98 @@ function DateFilterPopup({
 
     }
 
+    
+
+    // IMPORTANT: use capture phase
     document.addEventListener(
       "mousedown",
       handleClickOutside
+      
     );
 
     return () =>
       document.removeEventListener(
         "mousedown",
         handleClickOutside
+        
       );
 
   }, []);
 
 
 
-  const handleSearch = () => {
+  function handleSearchClick() {
 
     onSearch();
 
     setOpen(false);
 
-  };
-
+  }
 
 
   return (
 
     <div
+      ref={wrapperRef}
       className="relative"
-      ref={ref}
     >
 
-      {/* filter button */}
+      {/* FILTER BUTTON */}
 
       <button
 
-        onClick={() => setOpen(!open)}
+        onClick={() => setOpen(prev => !prev)}
 
         className="
           p-2
-
           rounded-md
-
-          border
-          border-strong
-
+          border border-strong
           bg-bgCard
-
           hover:bg-primarySoft
-          hover:text-primary
-
-          transition
         "
       >
 
-        <SlidersHorizontal size={18} />
+        <SlidersHorizontal size={18}/>
 
       </button>
 
 
 
-      {/* popup */}
+      {/* POPUP */}
 
       {open && (
 
         <div
           className="
             absolute
-
             right-0
-            top-11
+            top-12
 
-            z-50
+            z-[9999]
 
             bg-bgCard
 
-            border
-            border-strong
+            border border-strong
 
             rounded-lg
 
             shadow-lg
 
-            p-3
+            p-4
 
-            card-soft
+            w-[300px]
+            sm:w-[340px]
           "
         >
 
           <GetAttendance
+
             filters={filters}
+
             setFilters={setFilters}
-            onSearch={handleSearch}
+
+            onSearch={handleSearchClick}
+
           />
 
         </div>

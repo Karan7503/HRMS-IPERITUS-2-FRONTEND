@@ -16,6 +16,8 @@ function Navbar(){
     return(
 
         <nav className="
+            bg-Sticky
+            
             bg-bgCard
             border-b
             border-borderColor

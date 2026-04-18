@@ -1,147 +1,237 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SlidersHorizontal } from "lucide-react";
-import GetAttendance from './../components/attendance/GetAttendance';
-import AllAttendance from './../components/attendance/AllAttendance';
 
+import { fetchAttendance } from "../services/attendanceService";
+
+import GetAttendance from "../components/attendance/GetAttendance";
+import AllAttendance from "../components/attendance/AllAttendance";
+import AttendanceStats from "../components/attendance/AttendanceStats";
+import AttendanceLegend from "../components/attendance/AttendanceLegend";
+
+import Breadcrumb from "../ui/BreadCrumb";
 
 
 function Attendance() {
 
-    const [filters, setFilters] = useState({
+  /* filters */
+  const [filters, setFilters] = useState({
     start: "",
     end: ""
   });
 
-  const [showFiltered, setShowFiltered] = useState(false);
 
+  /* popup */
   const [showPopup, setShowPopup] = useState(false);
- 
-  const onSearch = () => {
 
-    if(filters.start && filters.end){
 
-      setShowFiltered(true);
+  /* backend data */
+  const defaultSummary = {
+    totalDays: 0,
+    present: 0,
+    absent: 0,
+    late: 0,
+    holiday: 0,
+    attendancePercent: 0
+  };
 
-      setShowPopup(false);
+  const [records, setRecords] = useState([]);
+  const [summary, setSummary] = useState(defaultSummary);
 
+
+  /* load data */
+  async function loadAttendance() {
+    try {
+      const data = await fetchAttendance(filters);
+      setRecords(data.records);
+      setSummary(data.summary ?? defaultSummary);
     }
 
-  };
-  
+    catch (err) {
+      console.error("attendance fetch failed", err);
+    }
+  }
+
+
+  /* initial load */
+  useEffect(() => {
+    loadAttendance();
+  }, []);
+
+
+
+  /* filter search */
+  function onSearch() {
+    if (!filters.start || !filters.end) return;
+    loadAttendance();
+    setShowPopup(false);
+  }
+
 
 
   return (
 
     <div
       className="
-        bg-bgMain 
-        min-h-screen 
-        p-6 
+        bg-bgMain
+        min-h-screen
+
+        px-4
+        sm:px-6
+        lg:px-10
+        xl:px-16
+
+        py-4
         space-y-6
-        text-textMain
       "
     >
-      {/* header */}
 
-        <div
-          className="
-            flex
-            items-center
-            justify-between
-          "
-        >
+      {/* ROW 1 */}
+      <div className=" flex items-center justify-between">
 
-          <h1
-            className="
-              text-lg
-              font-semibold
-            "
-          >
-            Attendance
-          </h1>
+        <Breadcrumb
+          items={[
+            { label: "Dashboard", path: "/dashboard" },
+            { label: "Attendance", path: "/attendance" }
+          ]}
+        />
+      </div>
 
-           {/* filter icon */}
+
+
+      {/* TITLE */}
+      
+      <div className="flex items-center justify-between">
+
+      <h1
+        className="
+          text-xl
+          sm:text-2xl
+          font-semibold
+          text-textMain
+        "
+      >
+        Attendance
+      </h1>
+
+       {/* FILTER BUTTON */}
 
         <div className="relative">
 
           <button
-
             onClick={() => setShowPopup(!showPopup)}
-
             className="
               p-2
-
               rounded-md
-
-              border
-              border-strong
-
+              border border-strong
               bg-bgCard
-
               hover:bg-primarySoft
-              hover:text-primary
-
-              transition
             "
           >
-
-            <SlidersHorizontal size={18} />
-
+            <SlidersHorizontal size={18}/>
           </button>
 
-          {/* popup */}
 
+          {/* FILTER POPUP */}
           {showPopup && (
 
             <div
               className="
                 absolute
                 right-0
-                top-11
-                z-50
+                top-12
+                z-[1000]
                 bg-bgCard
-                border
-                border-strong
+                border border-strong
                 rounded-lg
                 shadow-lg
+
                 p-3
-                card-soft
+                w-[300px]
+                sm:w-[340px]
               "
             >
+
               <GetAttendance
                 filters={filters}
                 setFilters={setFilters}
                 onSearch={onSearch}
+
               />
+
             </div>
+
           )}
 
         </div>
+      </div>
 
-        {/* <GetAttendance
-        filters={filters}
-        setFilters={setFilters}
-        onSearch={onSearch}
-      />  */}
+
+
+      {/* SEPARATOR */}
+
+      <div className="border-b border-strong"/>
+
+
+
+      {/* STATUS LEGEND */}
+
+      <AttendanceLegend/>
+
+
+
+      {/* TABLE + SUMMARY */}
+
+      <div
+        className="
+          grid
+          gap-6
+
+          lg:grid-cols-[minmax(0,1fr)_300px]
+        "
+      >
+
+        {/* TABLE */}
+
+        <div className="min-w-0">
+
+          <AllAttendance
+            summary={summary}
+            data={records}
+
+          />
+
+        </div>
+
+
+
+        {/* SUMMARY */}
 {/* 
-         <AllAttendance 
-          filters={showFiltered 
-          ? filters : null} /> */}
+        <AttendanceStats
+
+          summary={summary}
+
+          filters={filters}
+
+
+
+        /> */}
+
+          {/* SUMMARY (sticky) */}
+
+        <div className="lg:sticky lg:top-24 h-fit">
+
+          <AttendanceStats
+            summary={summary}
+            filters={filters}
+          />
+
+        </div>
+
+        </div>
 
 
     </div>
 
-    {/* table */}
-
-      <AllAttendance
-        filters={
-          showFiltered
-            ? filters
-            : null
-        }
-      />
-
-    </div>
   );
 
 }

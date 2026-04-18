@@ -1,5 +1,6 @@
 import DatePicker from "react-datepicker";
 import { Calendar } from "lucide-react";
+
 import "react-datepicker/dist/react-datepicker.css";
 
 function DateInput({
@@ -10,7 +11,7 @@ function DateInput({
 
   return (
 
-    <div className="flex flex-col w-36">
+    <div className="flex flex-col w-full">
 
       <label
         className="
@@ -20,42 +21,52 @@ function DateInput({
           mb-1
         "
       >
+
         {label}
+
       </label>
 
-      <div className="relative ">
+
+      <div className="relative w-full">
 
         <DatePicker
-            selected={selected}
-            onChange={onChange}
-            dateFormat="yyyy-MM-dd"
-            placeholderText="yyyy-mm-dd"
 
-            popperPlacement="bottom-start"
-            
-            className="
-                w-full
+          selected={selected}
 
-                h-[36px]
+          onChange={onChange}
 
-                pl-3
+          dateFormat="yyyy-MM-dd"
 
-                text-sm
+          placeholderText="yyyy-mm-dd"
 
-                bg-bgMain
-                text-textMain
+          popperPlacement="bottom-start"
 
-                border
-                border-strong
+          popperClassName="z-[9999]"
 
-                rounded-md
+          className="
+            w-full
 
-                focus:outline-none
-                focus:border-primary
-            "
+            h-[36px]
+
+            pl-3 pr-9
+
+            text-sm
+
+            bg-bgMain
+            text-textMain
+
+            border border-strong
+
+            rounded-md
+
+            focus:outline-none
+            focus:border-primary
+          "
         />
 
+
         <Calendar
+
           size={15}
 
           className="
@@ -65,7 +76,6 @@ function DateInput({
             top-1/2
             -translate-y-1/2
 
-            text-textMain
             opacity-60
 
             pointer-events-none

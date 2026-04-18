@@ -19,21 +19,24 @@ function DataTable({
   });
 
   return (
+    // bg-bgCard
+    // border
+    // border-strong
 
     <div
       className="
-        bg-bgCard
-        border
-        border-strong
 
-        rounded-xl
-        overflow-visible
+        rounded-lg
         shadow-sm
-        card-soft
+        overflow-x-auto
+  
+       
       "
     >
 
-      <table className="w-full">
+  
+
+      <table className="w-full table-auto">
 
         {/* HEADER */}
 
@@ -42,6 +45,7 @@ function DataTable({
             bg-tableHeader
             border-b
             border-strong
+            
           "
         >
 
@@ -55,20 +59,25 @@ function DataTable({
                   key={header.id}
 
                   className="
+
+                    sticky
+                    top-0
+
+                    z-30
+
+                    bg-tableHeader
+                    px-2 py-3
+
+                    text-sm
                     text-left
-
-                    px-5
-                    py-4
-
-                    text-xs
                     font-semibold
 
                     tracking-wide
-                    uppercase
-
                     text-muted
-                  "
-                >
+                    "
+                    >
+                      {/* uppercase
+                      text-muted */}
 
                   {flexRender(
                     header.column.columnDef.header,
@@ -95,12 +104,12 @@ function DataTable({
             table.getRowModel().rows.map(row => (
 
               <tr
-                key={row.id}
-
-                className="
-                  border-t
-                  border-strong
-
+              key={row.id}
+              
+              // border-borderColor
+              className="
+              border-t
+              border-strong
                   even:bg-rowAlt
 
                   hover:bg-primarySoft
@@ -115,11 +124,8 @@ function DataTable({
                     key={cell.id}
 
                     className="
-                      px-5
-                      py-3.5
-
+                      px-2 py-2.5
                       text-sm
-                      text-textMain
                     "
                   >
 
@@ -162,6 +168,7 @@ function DataTable({
         </tbody>
 
       </table>
+ 
 
     </div>
 
