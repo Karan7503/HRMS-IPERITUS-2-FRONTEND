@@ -1,4 +1,5 @@
 import { useState } from "react";
+import DateInput from "../../ui/DateInput";
 
 function RequestForm({ onSubmit }) {
 
@@ -20,7 +21,7 @@ function RequestForm({ onSubmit }) {
 
   });
 
-  function handleChange(e){
+  function handleChange(e) {
 
     const { name, value, type, checked } = e.target;
 
@@ -31,13 +32,23 @@ function RequestForm({ onSubmit }) {
 
   }
 
-  function handleSubmit(e){
+  function handleDateChange(name, date) {
+
+    setForm(prev => ({
+      ...prev,
+      [name]: date
+        ? date.toISOString().split("T")[0]
+        : ""
+    }));
+
+  }
+
+  function handleSubmit(e) {
 
     e.preventDefault();
-
     console.log(form);
 
-    if(onSubmit){
+    if (onSubmit) {
       onSubmit(form);
     }
 
@@ -45,34 +56,11 @@ function RequestForm({ onSubmit }) {
 
   return (
 
-    <form
-      onSubmit={handleSubmit}
-      className="space-y-5"
-    >
-
-      {/* AUTO FIELDS */}
-
-      <Field label="Request No">
-        <input
-          className="input-disabled"
-          value="AUTO GENERATED"
-          disabled
-        />
-      </Field>
-
-
-      <Field label="Requester">
-        <input
-          className="input-disabled"
-          value="Current User"
-          disabled
-        />
-      </Field>
-
+    <form onSubmit={handleSubmit} className="space-y-5">
 
       {/* REQUEST TYPE */}
 
-      <Field label="Request For">
+      <Field label="Request Type">
 
         <select
           name="request_for"
@@ -82,7 +70,7 @@ function RequestForm({ onSubmit }) {
           required
         >
 
-          <option value="">Select request type</option>
+          <option value="">Select type</option>
 
           <option>Stationary</option>
           <option>IT</option>
@@ -95,7 +83,7 @@ function RequestForm({ onSubmit }) {
 
       </Field>
 
-
+      {/* SUBJECT */}
       <Field label="Subject">
 
         <input
@@ -109,7 +97,7 @@ function RequestForm({ onSubmit }) {
 
       </Field>
 
-
+      {/* COMMENTS */}
       <Field label="Comments">
 
         <textarea
@@ -123,62 +111,55 @@ function RequestForm({ onSubmit }) {
       </Field>
 
 
-      {/* DATE SECTION */}
-
-      <SectionTitle>
-        Timeline
-      </SectionTitle>
-
+      {/* TIMELINE */}
+      <SectionTitle>Timeline</SectionTitle>
 
       <Grid2>
 
-        <Field label="Open Date">
+        <DateInput
+          label="Open Date"
+          selected={
+            form.open_date
+              ? new Date(form.open_date)
+              : null
+          }
+          onChange={(date) =>
+            handleDateChange("open_date", date)
+          }
+        />
 
-          <input
-            type="date"
-            name="open_date"
-            value={form.open_date}
-            onChange={handleChange}
-            className="input"
-          />
 
-        </Field>
-
-
-        <Field label="Close Date">
-
-          <input
-            type="date"
-            name="close_date"
-            value={form.close_date}
-            onChange={handleChange}
-            className="input"
-          />
-
-        </Field>
+        <DateInput
+          label="Close Date"
+          selected={
+            form.close_date
+              ? new Date(form.close_date)
+              : null
+          }
+          onChange={(date) =>
+            handleDateChange("close_date", date)
+          }
+        />
 
       </Grid2>
 
 
-      <Field label="Actual Closed Date">
+      <DateInput
+        label="Actual Closed Date"
+        selected={
+          form.actual_close_date
+            ? new Date(form.actual_close_date)
+            : null
+        }
+        onChange={(date) =>
+          handleDateChange("actual_close_date", date)
+        }
+      />
 
-        <input
-          type="date"
-          name="actual_close_date"
-          value={form.actual_close_date}
-          onChange={handleChange}
-          className="input"
-        />
 
-      </Field>
+      {/* STATUS */}
 
-
-      {/* STATUS SECTION */}
-
-      <SectionTitle>
-        Status
-      </SectionTitle>
-
+      <SectionTitle>Status</SectionTitle>
 
       <Grid2>
 
@@ -260,11 +241,8 @@ function RequestForm({ onSubmit }) {
         btn-primary
         w-full
         mt-2
-        "
-      >
-
+      ">
         Add Request
-
       </button>
 
     </form>
@@ -276,9 +254,9 @@ function RequestForm({ onSubmit }) {
 
 /* reusable field */
 
-function Field({ label, children }){
+function Field({ label, children }) {
 
-  return(
+  return (
 
     <div>
 
@@ -304,9 +282,9 @@ function Field({ label, children }){
 
 /* reusable grid */
 
-function Grid2({ children }){
+function Grid2({ children }) {
 
-  return(
+  return (
 
     <div className="grid grid-cols-2 gap-3">
       {children}
@@ -319,23 +297,18 @@ function Grid2({ children }){
 
 /* section title */
 
-function SectionTitle({ children }){
+function SectionTitle({ children }) {
 
-  return(
+  return (
 
     <p className="
-    text-xs
-    uppercase
-    tracking-wide
-
-    text-muted
-
-    pt-2
-    "
-    >
-
+      text-xs
+      uppercase
+      tracking-wide
+      text-muted
+      pt-2
+    ">
       {children}
-
     </p>
 
   );

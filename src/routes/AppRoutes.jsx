@@ -5,53 +5,60 @@ import Attendance from "../pages/Attendance";
 import Leave from "../pages/Leave";
 import Requests from "../pages/Requests";
 import Resume from './../pages/Resume';
+import ConferenceBooking from "../components/requests/ConferenceBooking";
 
 
 
-function AppRoutes(){
-    
+function AppRoutes() {
+
     return (
         <Routes>
 
 
             <Route
                 path="/"
-                element={<Login/>}
-                />
+                element={<Login />}
+            />
 
             <Route
                 path="/dashboard"
-                element={<Dashboard/>}
-                />
+                element={<Dashboard />}
+            />
 
             <Route
                 path="/attendance"
-                element= {<Attendance/>}
-                
+                element={<Attendance />}
+
             />
 
             <Route
                 path="/leave"
-                element= {<Leave/>}
-                
+                element={<Leave />}
+
             />
 
             <Route
                 path="/requests"
-                element= {<Requests/>}
-                
+                element={<Requests />}
+
             />
 
             <Route
                 path="/resume"
-                element= {<Resume/>}
-                
+                element={<Resume />}
+
             />
 
             <Route
                 path="/data"
-                element= {<Attendance/>}
-                
+                element={<Attendance />}
+
+            />
+
+            <Route
+                path="/conference"
+                element={<ConferenceBooking />}
+
             />
 
 

@@ -1,82 +1,189 @@
 const RequestTableColumns = [
 
   {
-    header: "Request No.",
-    accessorKey: "request_no"
-  },
-
-  {
-    header: "Owner",
-    accessorKey: "owner"
-  },
-
-  {
-    header: "Request For",
-    accessorKey: "request_for"
-  },
-
-  {
-    header: "User Status",
-    accessorKey: "user_status",
+    id: "req",
+    header: () => (
+      <div className="text-center">
+        Req
+      </div>
+    ),
+    size: 60,
 
     cell: ({ row }) => (
-
-      <span
-        className="
-          px-2 py-0.5
-          rounded-full
-          text-xs
-          font-medium
-          bg-primarySoft
-          text-primary
-        "
-      >
-        {row.original.user_status}
-      </span>
-
+      <div className="text-center font-medium tabular-nums">
+        {row.index + 1}
+      </div>
     )
   },
 
-  {
-    header: "Open Date",
-    accessorKey: "open_date"
-  },
+
 
   {
-    header: "Closed Date",
-    accessorKey: "closed_date"
+    accessorKey: "owner",
+    header: "Owner",
+    size: 140
   },
 
-  {
-    header: "Send To",
-    accessorKey: "report_to"
-  },
+
 
   {
-    header: "Status",
-    accessorKey: "response_status"
+    accessorKey: "request_for",
+    header: "Request For",
+    size: 160
   },
 
+
+
   {
-    header: "Active",
-    accessorKey: "active",
+    accessorKey: "user_status",
+
+    header: () => (
+      <div className="text-center">
+        User Status
+      </div>
+    ),
+
+    size: 160,
 
     cell: ({ row }) => (
-
-      <span
-        className={`
-          px-2 py-0.5
+      <div className="flex justify-center">
+        <span
+          className="
+          min-w-[95px]
+          px-2 py-1
+          text-sm
+          font-medium
           rounded-full
+          text-center
+          bg-primarySoft
+          text-primary
+        ">
+          {row.original.user_status}
+        </span>
+      </div>
+    )
+  },
+
+
+
+  {
+    accessorKey: "open_date",
+
+    header: () => (
+      <div className="text-center">
+        Open Date
+      </div>
+    ),
+    size: 140,
+    cell: ({ row }) => (
+      <div className="text-center tabular-nums">
+        {row.original.open_date}
+      </div>
+    )
+  },
+
+
+
+  {
+    accessorKey: "closed_date",
+    header: () => (
+      <div className="text-center">
+        Closed Date
+      </div>
+    ),
+    size: 140,
+    cell: ({ row }) => (
+      <div className="text-center tabular-nums">
+        {row.original.closed_date || "-"}
+      </div>
+    )
+  },
+
+
+
+  {
+    accessorKey: "report_to",
+    header: "Send To",
+    size: 150
+  },
+
+
+
+  {
+    accessorKey: "response_status",
+    header: () => (
+      <div className="text-center">
+        Status
+      </div>
+    ),
+    size: 150,
+    cell: ({ row }) => {
+      const status = row.original.response_status;
+
+      const badgeClass =
+        status === "Approved"
+          ? "badge-success"
+          : "badge-warning";
+
+      return (
+
+        <div className="flex justify-center">
+
+          <span
+            className={`
+            min-w-[95px]
+            px-2 py-1
+            text-xs
+            font-medium
+            rounded-full
+            text-center
+            ${badgeClass}
+          `}
+          >
+            {status}
+          </span>
+
+        </div>
+
+      );
+
+    }
+  },
+
+
+
+  {
+    accessorKey: "active",
+    header: () => (
+      <div className="text-center">
+        Active
+      </div>
+    ),
+
+    size: 120,
+    cell: ({ row }) => (
+
+      <div className="flex justify-center">
+
+        <span
+          className={`
+          min-w-[70px]
+          px-2 py-1
           text-xs
+          font-medium
+          rounded-full
+          text-center
 
           ${row.original.active
-            ? "bg-success-soft text-success-strong"
-            : "bg-rowAlt text-muted"}
+              ? "badge-success"
+              : "badge-neutral"}
         `}
-      >
-        {row.original.active ? "Yes" : "No"}
-      </span>
+        >
 
+          {row.original.active ? "Yes" : "No"}
+
+        </span>
+      </div>
     )
   }
 

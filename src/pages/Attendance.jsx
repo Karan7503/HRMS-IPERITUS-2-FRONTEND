@@ -4,11 +4,11 @@ import { SlidersHorizontal } from "lucide-react";
 import { fetchAttendance } from "../services/attendanceService";
 
 import GetAttendance from "../components/attendance/GetAttendance";
-import AllAttendance from "../components/attendance/AllAttendance";
 import AttendanceStats from "../components/attendance/AttendanceStats";
 import AttendanceLegend from "../components/attendance/AttendanceLegend";
 
 import Breadcrumb from "../ui/BreadCrumb";
+import AttendanceTable from "../components/attendance/AttendanceTable";
 
 
 function Attendance() {
@@ -43,9 +43,9 @@ function Attendance() {
     try {
       const data = await fetchAttendance(filters);
       setRecords(data.records);
+      console.log("filters", filters);
       setSummary(data.summary ?? defaultSummary);
     }
-
     catch (err) {
       console.error("attendance fetch failed", err);
     }
@@ -70,50 +70,43 @@ function Attendance() {
 
   return (
 
-    <div
-      className="
-        bg-bgMain
-        min-h-screen
-
-        px-4
-        sm:px-6
-        lg:px-10
-        xl:px-16
-
-        py-4
-        space-y-6
-      "
-    >
+    <div className="
+      bg-bgMain
+      min-h-screen
+      px-4
+      sm:px-6
+      lg:px-10
+      xl:px-16
+      py-4
+      space-y-6
+    ">
 
       {/* ROW 1 */}
-      <div className=" flex items-center justify-between">
 
-        <Breadcrumb
-          items={[
-            { label: "Dashboard", path: "/dashboard" },
-            { label: "Attendance", path: "/attendance" }
-          ]}
-        />
-      </div>
+      <Breadcrumb
+        items={[
+          { label: "Dashboard", path: "/dashboard" },
+          { label: "Attendance", path: "/attendance" }
+        ]}
+      />
 
 
 
       {/* TITLE */}
-      
+
       <div className="flex items-center justify-between">
 
-      <h1
-        className="
+        <h1
+          className="
           text-xl
           sm:text-2xl
           font-semibold
           text-textMain
-        "
-      >
-        Attendance
-      </h1>
+        ">
+          Attendance
+        </h1>
 
-       {/* FILTER BUTTON */}
+        {/* FILTER BUTTON */}
 
         <div className="relative">
 
@@ -127,15 +120,13 @@ function Attendance() {
               hover:bg-primarySoft
             "
           >
-            <SlidersHorizontal size={18}/>
+            <SlidersHorizontal size={18} />
           </button>
 
 
           {/* FILTER POPUP */}
           {showPopup && (
-
-            <div
-              className="
+            <div className="
                 absolute
                 right-0
                 top-12
@@ -144,19 +135,12 @@ function Attendance() {
                 border border-strong
                 rounded-lg
                 shadow-lg
-
                 p-3
                 w-[300px]
                 sm:w-[340px]
-              "
-            >
+              ">
 
-              <GetAttendance
-                filters={filters}
-                setFilters={setFilters}
-                onSearch={onSearch}
-
-              />
+              <GetAttendance filters={filters} setFilters={setFilters} onSearch={onSearch} />
 
             </div>
 
@@ -169,65 +153,33 @@ function Attendance() {
 
       {/* SEPARATOR */}
 
-      <div className="border-b border-strong"/>
+      <div className="border-b border-strong" />
 
 
 
       {/* STATUS LEGEND */}
 
-      <AttendanceLegend/>
+      <AttendanceLegend />
 
 
 
       {/* TABLE + SUMMARY */}
 
-      <div
-        className="
-          grid
-          gap-6
-
-          lg:grid-cols-[minmax(0,1fr)_300px]
-        "
-      >
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_300px]">
 
         {/* TABLE */}
-
         <div className="min-w-0">
-
-          <AllAttendance
-            summary={summary}
-            data={records}
-
-          />
-
+          <AttendanceTable data={records} />
         </div>
 
 
-
-        {/* SUMMARY */}
-{/* 
-        <AttendanceStats
-
-          summary={summary}
-
-          filters={filters}
-
-
-
-        /> */}
-
-          {/* SUMMARY (sticky) */}
-
+        {/* SUMMARY (sticky) */}
         <div className="lg:sticky lg:top-24 h-fit">
-
-          <AttendanceStats
-            summary={summary}
-            filters={filters}
-          />
-
+          <AttendanceStats summary={summary} filters={filters} />
         </div>
 
-        </div>
+
+      </div>
 
 
     </div>

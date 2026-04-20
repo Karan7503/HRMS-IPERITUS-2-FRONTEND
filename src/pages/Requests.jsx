@@ -8,12 +8,19 @@ import SidePopup from "../ui/SidePopup";
 
 import RequestForm from "../components/requests/RequestForm";
 import RequestTableColumns from "../components/requests/RequestTableColumns";
+import AttendanceStats from "../components/attendance/AttendanceStats";
+import AttendanceLegend from "../components/attendance/AttendanceLegend";
+import RequestFilter from "../components/requests/RequestFilter";
+import RequestStats from "../components/requests/RequestStats";
+import RequestLegend from "../components/requests/RequestLegend";
+
 
 
 function Requests() {
 
   const [showPopup, setShowPopup] = useState(false);
   const [data, setData] = useState([]);
+  const [typeFilter, setTypeFilter] = useState("All");
 
   async function loadRequests() {
     try {
@@ -34,6 +41,13 @@ function Requests() {
     }
   }
 
+  const filteredData =
+    typeFilter === "All"
+      ? data
+      : data.filter(
+        r => r.request_for === typeFilter
+      );
+
   useEffect(() => {
     loadRequests();
   }, []);
@@ -43,12 +57,10 @@ function Requests() {
       className="
         bg-bgMain
         min-h-screen
-
         px-4
         sm:px-6
         lg:px-10
         xl:px-16
-
         py-4
         space-y-6
       "
@@ -61,49 +73,118 @@ function Requests() {
         ]}
       />
 
-        <div className="flex items-center justify-between w-full">
+      {/* TITLE */}
 
-          <h1 className="
-            text-xl
-            font-semibold
-            text-textMain
+      <div className="flex items-center justify-between ">
+
+        <h1 className="
+          text-xl
+          sm:text-2xl
+          font-semibold
+          text-textMain
           ">
-            My Requests
-          </h1>
+          My Requests
+        </h1>
+
+        <div className="relative">
+          {/* <div className="w-[120px] flex justify-end"> */}
 
           <button
             onClick={() => setShowPopup(true)}
+            title="Add Request"
             className="
-              btn-primary
-              flex
-              items-center
-              gap-2
-              whitespace-nowrap
+              p-2
+              rounded-md
+              border border-strong
+              bg-bgCard
+              hover:bg-primarySoft
+              hover:text-primary
+              transition
               cursor-pointer
-            "
-          >
-            <Plus size={16}/>
-            Add Request
+          ">
+            <Plus size={18} />
           </button>
 
         </div>
 
-       <div className="max-w-4xl overflow-x-auto">
-        <DataTable
-          data={data}
-          columns={RequestTableColumns}
-          emptyMessage="No requests yet"
-        />
       </div>
 
-        <SidePopup
+      {/* SEPARATOR */}
+
+      <div className="border-b border-strong" />
+
+
+      {/* STATUS LEGEND + Filter */}
+
+      {/* STATUS LEGEND + FILTER */}
+
+      <div
+        className="
+        flex
+        flex-col
+        sm:flex-row
+        sm:items-center
+        sm:justify-between
+        gap-2
+      "
+      >
+
+        {/* <AttendanceLegend /> */}
+        <RequestLegend />
+
+        <RequestFilter
+          value={typeFilter}
+          onChange={setTypeFilter}
+        />
+
+      </div>
+
+
+      {/* TABLE + SUMMARY */}
+
+      <div
+        className="
+        grid
+        gap-6
+
+        lg:grid-cols-[minmax(0,1fr)_300px]
+      "
+      >
+
+        {/* TABLE */}
+        <div className="min-w-0">
+
+          <DataTable
+            data={filteredData}
+            columns={RequestTableColumns}
+            emptyMessage="No requests yet"
+          />
+
+        </div>
+
+
+        {/* SUMMARY */}
+        <div className="lg:sticky lg:top-24 h-fit">
+
+          <RequestStats data={filteredData} />
+
+        </div>
+
+      </div>
+
+
+
+
+      <SidePopup
         isOpen={showPopup}
         onClose={() => setShowPopup(false)}
         title="Add Request"
         width="500px"
       >
-        <RequestForm onSubmit={handleAddRequest}/>
+        <RequestForm onSubmit={handleAddRequest} />
       </SidePopup>
+
+
 
 
     </div>

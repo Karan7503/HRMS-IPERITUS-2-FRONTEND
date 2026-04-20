@@ -1,5 +1,3 @@
-
-
 import {
   useReactTable,
   getCoreRowModel,
@@ -19,35 +17,14 @@ function DataTable({
   });
 
   return (
-    // bg-bgCard
-    // border
-    // border-strong
 
-    <div
-      className="
-
-        rounded-lg
-        shadow-sm
-        overflow-x-auto
-  
-       
-      "
-    >
-
-  
+    <div className="rounded-lg shadow-sm">
 
       <table className="w-full table-auto">
 
         {/* HEADER */}
 
-        <thead
-          className="
-            bg-tableHeader
-            border-b
-            border-strong
-            
-          "
-        >
+        <thead className="bg-tableHeader border-b border-strong">
 
           {table.getHeaderGroups().map(headerGroup => (
 
@@ -59,25 +36,17 @@ function DataTable({
                   key={header.id}
 
                   className="
-
                     sticky
-                    top-0
-
+                    top-[64px]
                     z-30
-
                     bg-tableHeader
-                    px-2 py-3
-
+                    px-2 py-5
                     text-sm
                     text-left
                     font-semibold
-
                     tracking-wide
                     text-muted
-                    "
-                    >
-                      {/* uppercase
-                      text-muted */}
+                ">
 
                   {flexRender(
                     header.column.columnDef.header,
@@ -104,10 +73,10 @@ function DataTable({
             table.getRowModel().rows.map(row => (
 
               <tr
-              key={row.id}
-              
-              // border-borderColor
-              className="
+                key={row.id}
+
+                // border-borderColor
+                className="
               border-t
               border-strong
                   even:bg-rowAlt
@@ -124,7 +93,7 @@ function DataTable({
                     key={cell.id}
 
                     className="
-                      px-2 py-2.5
+                      px-2 py-4
                       text-sm
                     "
                   >
@@ -168,7 +137,7 @@ function DataTable({
         </tbody>
 
       </table>
- 
+
 
     </div>
 
