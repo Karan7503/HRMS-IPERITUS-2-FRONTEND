@@ -53,17 +53,18 @@ function StatItem({ label, value, type }) {
 }
 
 
-export default function AttendanceStats({summary = {}, filters = {}}){
+export default function AttendanceStats({ summary = {}, filters = {} }) {
   const {
     totalDays = 0,
     present = 0,
     absent = 0,
     late = 0,
     holiday = 0,
+    weekOff = 0,
     attendancePercent = 0
   } = summary;
 
-  return(
+  return (
 
     <div className="
     bg-bgCard
@@ -98,19 +99,19 @@ export default function AttendanceStats({summary = {}, filters = {}}){
       </div>
 
 
-      <StatItem label="Total Days" value={totalDays} type="neutral"/>
+      <StatItem label="Total Days" value={totalDays} type="neutral" />
 
-      <StatItem label="Present" value={present} type="success"/>
+      <StatItem label="Present" value={present} type="success" />
 
-      <StatItem label="Absent" value={absent} type="danger"/>
+      <StatItem label="Absent" value={absent} type="danger" />
 
-      <StatItem label="Late" value={late} type="warning"/>
+      <StatItem label="Late" value={late} type="warning" />
 
-      <StatItem label="Holiday" value={holiday} type="neutral"/>
+      <StatItem label="Holiday" value={holiday} type="neutral" />
 
-      <StatItem label="Attendance %" value={`${attendancePercent}%`} type="primary"/>
+      <StatItem label="Week Off" value={weekOff} type="neutral" />
 
-    
+      <StatItem label="Attendance %" value={`${attendancePercent}%`} type="primary" />
 
     </div>
 

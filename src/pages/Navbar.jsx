@@ -4,20 +4,20 @@ import LogoutButton from "../components/navbar/LogoutButton";
 import { useLocation } from "react-router-dom";
 import Logo from "../components/navbar/Logo1";
 import NavItem from "../components/navbar/NavItem";
-import UserAvatar from "../components/navbar/UserAvatar";
 import UserDropdown from "../components/navbar/UserDropdown";
+import UserInfoBar from "../components/navbar/UserInfoBar";
 
-function Navbar(){
+
+function Navbar() {
 
     const location = useLocation();
 
     const isLoginPage = location.pathname === "/";
 
-    return(
-
+    return (
+        // Top Navbar
         <nav className="
-            bg-Sticky
-            
+            bg-Sticky 
             bg-bgCard
             border-b
             border-borderColor
@@ -29,10 +29,9 @@ function Navbar(){
             shadow-sm
         ">
 
-            <Logo/>
+            <Logo />
 
             {!isLoginPage && (
-
                 <div className="
                     flex
                     items-center
@@ -62,21 +61,23 @@ function Navbar(){
                         ]}
                     />
 
-                    <ThemeDropdown/>
+                    <ThemeDropdown />
 
-                    {/* <LogoutButton/>
-                    <UserAvatar/> */}
-
-                    <UserDropdown/>
+                    <UserDropdown />
 
                 </div>
 
             )}
 
+
         </nav>
+
+
 
     );
 
 }
 
 export default Navbar;
+
+

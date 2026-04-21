@@ -23,18 +23,13 @@ function DataTable({
       <table className="w-full table-auto">
 
         {/* HEADER */}
-
         <thead className="bg-tableHeader border-b border-strong">
 
           {table.getHeaderGroups().map(headerGroup => (
-
             <tr key={headerGroup.id}>
-
               {headerGroup.headers.map(header => (
-
                 <th
                   key={header.id}
-
                   className="
                     sticky
                     top-[64px]
@@ -46,7 +41,7 @@ function DataTable({
                     font-semibold
                     tracking-wide
                     text-muted
-                ">
+                  ">
 
                   {flexRender(
                     header.column.columnDef.header,
@@ -60,31 +55,25 @@ function DataTable({
             </tr>
 
           ))}
-
         </thead>
 
 
         {/* BODY */}
-
         <tbody>
 
           {table.getRowModel().rows.length > 0 ? (
-
             table.getRowModel().rows.map(row => (
 
               <tr
                 key={row.id}
-
-                // border-borderColor
-                className="
-              border-t
-              border-strong
+                className={`
+                  border-t
+                  border-strong
                   even:bg-rowAlt
-
                   hover:bg-primarySoft
-
                   transition-colors
-                "
+                  ${row.original.rowClass || ""}
+                `}
               >
 
                 {row.getVisibleCells().map(cell => (

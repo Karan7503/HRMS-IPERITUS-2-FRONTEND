@@ -26,25 +26,6 @@ export default function AttendanceLegend() {
 
   return (
 
-    // <div className="flex flex-wrap gap-5">
-
-    //   <LegendItem
-    //     label="Present"
-    //     color="#22c55e"
-    //   />
-
-    //   <LegendItem
-    //     label="Absent"
-    //     color="#ef4444"
-    //   />
-
-    //   <LegendItem
-    //     label="Holiday"
-    //     color="#9ca3af"
-    //   />
-
-    // </div>
-
     <div className="flex flex-wrap gap-5">
 
       <LegendItem
@@ -65,6 +46,12 @@ export default function AttendanceLegend() {
       <LegendItem
         label="Late"
         color="rgba(245,158,11,0.5)"
+      />
+
+      <LegendItem
+        label="Weekly Off"
+        // color="rgba(255, 228, 228, 0.75)"
+        color="#dbeafe"   // blue-100
       />
 
     </div>

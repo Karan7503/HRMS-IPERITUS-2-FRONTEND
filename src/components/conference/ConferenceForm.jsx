@@ -1,22 +1,24 @@
 import { useState } from "react";
+import DateInput from "../../ui/DateInput";
+
 
 function ConferenceForm({
-
     time,
     room,
     date,
     onSave
-
 }) {
 
     const [form, setForm] = useState({
 
         subject: "",
-        startTime: time,
-        endTime: time,
-        allDay: false,
-        reminder: "None",
-        owner: "Karan Singh Rawat",
+
+        start_date: date,
+        start_time: time,
+
+        end_time: time,
+        all_day: false,
+
         project: "",
         attendees: "",
         description: ""
@@ -29,7 +31,6 @@ function ConferenceForm({
         setForm(prev => ({
 
             ...prev,
-
             [field]: value
 
         }));
@@ -37,207 +38,133 @@ function ConferenceForm({
     }
 
 
+    function handleDateChange(field, value) {
+
+        update(
+            field,
+            value
+                ? value.toISOString().split("T")[0]
+                : ""
+        );
+
+    }
+
+
+    function handleSubmit(e) {
+
+        e.preventDefault();
+
+        onSave(form);
+
+    }
+
+
     return (
 
-        <div className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-5">
 
 
-            {/* subject */}
+            {/* SUBJECT */}
 
-            <div>
-
-                <label className="text-sm text-muted">
-
-                    Subject
-
-                </label>
+            <Field label="Subject">
 
                 <input
-
                     value={form.subject}
-
                     onChange={e => update("subject", e.target.value)}
-
-                    className="
-            w-full
-            mt-1
-
-            px-3 py-2
-
-            text-sm
-
-            border border-strong
-            rounded-md
-
-            bg-bgCard
-            text-textMain
-
-            focus:outline-none
-            focus:border-primary
-          "
-
+                    className="input"
+                    placeholder="Meeting title"
+                    required
                 />
 
-            </div>
+            </Field>
 
 
 
-            {/* start time */}
+            {/* TIMELINE */}
 
-            <div className="grid grid-cols-2 gap-3">
+            <SectionTitle>
+                Timeline
+            </SectionTitle>
 
 
-                <div>
+            <Grid2>
 
-                    <label className="text-sm text-muted">
+                <DateInput
+                    label="Start Date"
+                    selected={
+                        form.start_date
+                            ? new Date(form.start_date)
+                            : null
+                    }
+                    onChange={(d) =>
+                        handleDateChange("start_date", d)
+                    }
+                />
 
-                        Start
 
-                    </label>
+                <Field label="Start Time">
 
                     <input
-
-                        value={date}
-
-                        disabled
-
+                        value={form.start_time}
+                        onChange={e => update("start_time", e.target.value)}
                         className="input"
-
                     />
 
-                </div>
+                </Field>
+
+            </Grid2>
 
 
-                <div>
 
-                    <label className="text-sm text-muted">
+            <Grid2>
 
-                        Time
-
-                    </label>
+                <Field label="End Time">
 
                     <input
-
-                        value={form.startTime}
-
-                        onChange={e => update("startTime", e.target.value)}
-
-                        className="
-              w-full
-              mt-1
-
-              px-3 py-2
-
-              text-sm
-
-              border border-strong
-              rounded-md
-
-              bg-bgCard
-            "
-
+                        value={form.end_time}
+                        onChange={e => update("end_time", e.target.value)}
+                        className="input"
                     />
 
-                </div>
-
-            </div>
-
-
-
-            {/* end time */}
-
-            <div className="grid grid-cols-2 gap-3">
-
-
-                <div>
-
-                    <label className="text-sm text-muted">
-
-                        End Time
-
-                    </label>
-
-                    <input
-
-                        value={form.endTime}
-
-                        onChange={e => update("endTime", e.target.value)}
-
-                        className="
-              w-full
-              mt-1
-
-              px-3 py-2
-
-              text-sm
-
-              border border-strong
-              rounded-md
-
-              bg-bgCard
-            "
-
-                    />
-
-                </div>
+                </Field>
 
 
                 <div className="flex items-end gap-2">
 
                     <input
                         type="checkbox"
-
-                        checked={form.allDay}
-
-                        onChange={e => update("allDay", e.target.checked)}
+                        checked={form.all_day}
+                        onChange={e => update("all_day", e.target.checked)}
                     />
 
-                    <span className="text-sm text-muted">
+                    <label className="text-sm text-muted">
 
                         All day
 
-                    </span>
+                    </label>
 
                 </div>
 
-            </div>
+            </Grid2>
 
 
 
-            {/* project */}
+            {/* DETAILS */}
 
-            <div>
+            <SectionTitle>
+                Details
+            </SectionTitle>
 
-                <label className="text-sm text-muted">
 
-                    Project
-
-                </label>
+            <Field label="Project">
 
                 <select
-
                     value={form.project}
-
                     onChange={e => update("project", e.target.value)}
-
-                    className="
-            w-full
-            mt-1
-
-            px-3 py-2
-
-            text-sm
-
-            border border-strong
-            rounded-md
-
-            bg-bgCard
-          "
+                    className="input"
                 >
 
-                    <option value="">
-                        Select Project
-                    </option>
+                    <option value="">Select Project</option>
 
                     <option>
                         LCF
@@ -245,155 +172,139 @@ function ConferenceForm({
 
                 </select>
 
-            </div>
+            </Field>
 
 
 
-            {/* room */}
-
-            <div>
-
-                <label className="text-sm text-muted">
-
-                    Room
-
-                </label>
+            <Field label="Room">
 
                 <input
-
                     value={room}
-
                     disabled
-
-                    className="
-            w-full
-            mt-1
-
-            px-3 py-2
-
-            text-sm
-
-            border border-strong
-            rounded-md
-
-            bg-bgCard
-          "
+                    className="input"
                 />
 
-            </div>
+            </Field>
 
 
 
-            {/* attendees */}
-
-            <div>
-
-                <label className="text-sm text-muted">
-
-                    Attendees
-
-                </label>
+            <Field label="Attendees">
 
                 <input
-
                     placeholder="Add attendees"
-
                     value={form.attendees}
-
                     onChange={e => update("attendees", e.target.value)}
-
-                    className="
-            w-full
-            mt-1
-
-            px-3 py-2
-
-            text-sm
-
-            border border-strong
-            rounded-md
-
-            bg-bgCard
-          "
+                    className="input"
                 />
 
-            </div>
+            </Field>
 
 
 
-            {/* description */}
-
-            <div>
-
-                <label className="text-sm text-muted">
-
-                    Description
-
-                </label>
+            <Field label="Description">
 
                 <textarea
-
                     rows={3}
-
                     value={form.description}
-
                     onChange={e => update("description", e.target.value)}
-
-                    className="
-            w-full
-            mt-1
-
-            px-3 py-2
-
-            text-sm
-
-            border border-strong
-            rounded-md
-
-            bg-bgCard
-          "
+                    className="input min-h-[90px]"
                 />
 
-            </div>
+            </Field>
 
 
 
-            {/* buttons */}
+            {/* SUBMIT */}
 
-            <div className="flex justify-end gap-2 pt-3">
+            <button
+                className="
+          btn-primary
+          w-full
+          mt-2
+        "
+            >
 
+                Save Booking
 
-                <button
-
-                    onClick={() => onSave(form)}
-
-                    className="
-            px-4 py-2
-
-            text-sm
-
-            rounded-md
-
-            bg-primaryGradient
-            text-white
-
-            hover:bg-primaryHover
-          "
-
-                >
-
-                    Save
-
-                </button>
+            </button>
 
 
-            </div>
+        </form>
 
+    );
+
+}
+
+
+
+/* reusable field */
+
+function Field({ label, children }) {
+
+    return (
+
+        <div>
+
+            <label className="
+        text-sm
+        text-muted
+        block
+        mb-1
+      ">
+
+                {label}
+
+            </label>
+
+            {children}
 
         </div>
 
-    )
+    );
 
 }
+
+
+
+/* grid layout */
+
+function Grid2({ children }) {
+
+    return (
+
+        <div className="grid grid-cols-2 gap-3">
+
+            {children}
+
+        </div>
+
+    );
+
+}
+
+
+
+/* section title */
+
+function SectionTitle({ children }) {
+
+    return (
+
+        <p className="
+      text-xs
+      uppercase
+      tracking-wide
+      text-muted
+      pt-2
+    ">
+
+            {children}
+
+        </p>
+
+    );
+
+}
+
 
 export default ConferenceForm;

@@ -1,25 +1,47 @@
-// temporary fake backend
+const API = "http://127.0.0.1:5000";
 
-export function fetchSlots({ room, date }) {
 
-    return Promise.resolve([
+/* get slots */
+export async function fetchSlots({ room, date }) {
 
-        { time: "09:00", status: "available" },
-        { time: "10:00", status: "booked", title: "Team Meeting" },
-        { time: "11:00", status: "available" },
-        { time: "12:00", status: "booked", title: "Client Call" },
-        { time: "13:00", status: "available" },
-        { time: "14:00", status: "available" }
+    const res = await fetch(
+        `${API}/conference/slots?room=${room}&date=${date}`
+    );
 
-    ]);
+    const data = await res.json();
 
+    return data.records;
 }
 
 
-export function bookSlot({ time }) {
+/* book slot */
+export async function bookSlot(payload) {
 
-    return Promise.resolve({
-        success: true
-    });
+    const res = await fetch(
 
+        `${API}/conference/book`,
+
+        {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify(payload)
+
+        }
+
+    );
+
+    const data = await res.json();
+
+    if (!res.ok) {
+
+        throw new Error(data.message || "Booking failed");
+
+    }
+
+    return data;
 }

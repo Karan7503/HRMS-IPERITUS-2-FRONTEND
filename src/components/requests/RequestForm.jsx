@@ -1,7 +1,11 @@
 import { useState } from "react";
 import DateInput from "../../ui/DateInput";
+import { useNavigate } from "react-router-dom";
+
 
 function RequestForm({ onSubmit }) {
+
+  const navigate = useNavigate();
 
   const [form, setForm] = useState({
 
@@ -29,6 +33,13 @@ function RequestForm({ onSubmit }) {
       ...prev,
       [name]: type === "checkbox" ? checked : value
     }));
+
+    // redirect when conference selected
+    if (name === "request_for" && value === "Conference") {
+
+      navigate("/conference");
+
+    }
 
   }
 

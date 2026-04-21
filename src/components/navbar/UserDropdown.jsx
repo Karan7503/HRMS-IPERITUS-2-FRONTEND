@@ -12,104 +12,83 @@ function UserDropdown() {
   useEffect(() => {
 
     function handleClickOutside(event) {
-
       if (
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target)
       ) {
-
         setOpen(false);
-
       }
-
     }
 
     document.addEventListener("mousedown", handleClickOutside);
 
     return () =>
       document.removeEventListener("mousedown", handleClickOutside);
-
   }, []);
 
 
   // temporary static user
   const user = {
-
     name: "Karan",
     email: "karan@iperitus.com",
     role: "ADMIN"
 
   };
 
+  const today = new Date();
+
+  const formattedDate = today.toLocaleDateString("en-IN", {
+    weekday: "long",
+    day: "numeric",
+    month: "short",
+    year: "numeric"
+  });
+
 
   return (
 
-    <div
-      ref={dropdownRef}
-      className="relative "
-    >
+    <div ref={dropdownRef} className="relative">
 
       {/* avatar button */}
       <button
         onClick={() => setOpen(!open)}
-
         className="
           w-9
           h-9
-
           flex
           items-center
           justify-center
-
           rounded-full
-
           border
           border-strong
-
           bg-bgCard
-
           hover:bg-primarySoft
           cursor-pointer
           transition
-        "
-      >
-
+      ">
         <User size={18} />
-
       </button>
 
 
 
       {/* dropdown panel */}
-
       {open && (
-
-        <div
-          className="
+        <div className="
             absolute
             right-0
             mt-2
-
             w-64
-
             bg-bgCard
-
             border
             border-strong
-
             rounded-xl
-
             shadow-lg
-
             z-50
             cursor-pointer
-
-          "
-        >
+        ">
 
 
           {/* user info */}
-
           <div className="p-3">
 
             <div className="text-sm font-medium">
@@ -119,7 +98,12 @@ function UserDropdown() {
             <div className="text-xs opacity-70">
               {user.email}
             </div>
+          </div>
 
+          <div className="border-t border-strong" />
+
+          <div className="p-3 text-sm font-medium">
+            {formattedDate}
           </div>
 
 
