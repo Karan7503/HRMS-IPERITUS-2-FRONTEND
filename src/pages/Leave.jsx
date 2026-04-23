@@ -1,5 +1,5 @@
 import { Plus } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BreadCrumb from "../ui/BreadCrumb";
 import DataTable from "../ui/DataTable";
 import SidePopup from "../ui/SidePopup";
@@ -9,71 +9,50 @@ import LeaveLegend from "../components/leave/LeaveLegend";
 import LeaveStats from "../components/leave/LeaveStats";
 import LeaveForm from "../components/leave/LeaveForm";
 import LeaveTableColumns from "../components/leave/LeaveTableColumns";
+import { fetchLeaves, applyLeave } from "../services/leaveService";
 
 function Leave() {
 
   const [showPopup, setShowPopup] = useState(false);
 
-  /* dummy balance */
-  const leaveBalance = [
+  const [leaveRecords, setLeaveRecords] = useState([])
 
-    {
-      type: "Casual Leave",
-      remaining: 8
-    },
+  useEffect(() => {
+    loadLeaves();
+  }, []);
 
-    {
-      type: "Sick Leave",
-      remaining: 6
-    },
-
-    {
-      type: "Privilege Leave",
-      remaining: 10
+  async function loadLeaves() {
+    try {
+      const leaves = await fetchLeaves();
+      setLeaveRecords(leaves || []);
+    } catch (err) {
+      console.error("Failed to load leaves:", err);
     }
+  }
 
-  ];
 
+  async function handleApplyLeave(formData) {
 
-  /* dummy leave records */
-  const leaveRecords = [
+    try {
 
-    {
-      id: 1,
-      leaveType: "Casual Leave",
-      fromDate: "2026-04-01",
-      toDate: "2026-04-02",
-      days: 2,
-      status: "Approved"
-    },
+      const payload = {
+        leaveType: formData.leave_type,
+        fromDate: formData.from_date,
+        toDate: formData.to_date,
+        reason: formData.reason
+      };
 
-    {
-      id: 2,
-      leaveType: "Sick Leave",
-      fromDate: "2026-04-05",
-      toDate: "2026-04-05",
-      days: 1,
-      status: "Pending"
-    },
+      const res = await applyLeave(payload);
 
-    {
-      id: 3,
-      leaveType: "Privilege Leave",
-      fromDate: "2026-04-10",
-      toDate: "2026-04-12",
-      days: 3,
-      status: "Rejected"
+      console.log("API response:", res);
+
+      setShowPopup(false);
+
+      await loadLeaves();
+
+    } catch (err) {
+      console.error("Failed to apply leave:", err);
     }
-
-  ];
-
-
-  function handleApplyLeave(formData) {
-
-    console.log("leave applied", formData);
-
-    setShowPopup(false);
-
   }
 
 

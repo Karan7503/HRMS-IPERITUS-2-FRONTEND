@@ -8,8 +8,6 @@ import SidePopup from "../ui/SidePopup";
 
 import RequestForm from "../components/requests/RequestForm";
 import RequestTableColumns from "../components/requests/RequestTableColumns";
-import AttendanceStats from "../components/attendance/AttendanceStats";
-import AttendanceLegend from "../components/attendance/AttendanceLegend";
 import RequestFilter from "../components/requests/RequestFilter";
 import RequestStats from "../components/requests/RequestStats";
 import RequestLegend from "../components/requests/RequestLegend";

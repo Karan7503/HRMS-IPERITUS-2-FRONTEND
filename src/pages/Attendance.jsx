@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { SlidersHorizontal } from "lucide-react";
 
 import { fetchAttendance } from "../services/attendanceService";
@@ -19,6 +19,7 @@ function Attendance() {
     end: ""
   });
 
+  const popupRef = useRef();
 
   /* popup */
   const [showPopup, setShowPopup] = useState(false);
@@ -55,7 +56,20 @@ function Attendance() {
   /* initial load */
   useEffect(() => {
     loadAttendance();
-  }, []);
+    function handleClickOutside(e) {
+      if (popupRef.current && !popupRef.current.contains(e.target)) {
+        setShowPopup(false);
+      }
+    }
+
+    if (showPopup) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showPopup]);
 
 
 
@@ -108,7 +122,7 @@ function Attendance() {
 
         {/* FILTER BUTTON */}
 
-        <div className="relative">
+        <div className="relative" ref={popupRef}>
 
           <button
             onClick={() => setShowPopup(!showPopup)}

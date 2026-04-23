@@ -43,6 +43,8 @@ function LeaveForm({ onSubmit }) {
         e.preventDefault();
 
         console.log(form);
+        console.log("karan")
+        // onSubmit(form);
 
         if (onSubmit) {
 

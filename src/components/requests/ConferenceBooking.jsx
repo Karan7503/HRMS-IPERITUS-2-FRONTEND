@@ -49,8 +49,6 @@ function ConferenceBooking() {
 
             setSlots(data);
 
-            // console.log("date", date)
-
             /* convert slots -> calendar events */
 
             const mappedEvents = data
@@ -215,7 +213,7 @@ function ConferenceBooking() {
                 <ConferenceStats
 
                     slots={slots}
-
+                    selectedDate={date}
                 />
 
             </div>

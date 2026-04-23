@@ -1,9 +1,27 @@
 const LeaveTableColumns = [
 
+    // {
+    //     accessorKey: "id",
+    //     header: "S.No",
+    //     cell: ({ row }) => row.index + 1
+    // },
     {
-        accessorKey: "id",
-        header: "ID"
+        id: "req",
+        header: () => (
+            <div className="text-center">
+                Req
+            </div>
+        ),
+        size: 60,
+
+        cell: ({ row }) => (
+            <div className="text-center font-medium tabular-nums">
+                {row.index + 1}
+            </div>
+        )
     },
+
+
 
     {
         accessorKey: "leaveType",
