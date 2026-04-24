@@ -1,11 +1,20 @@
 import { useState, useRef, useEffect } from "react";
 import { User, LogOut, LayoutDashboard } from "lucide-react";
+import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 
 function UserDropdown() {
 
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
 
 
   // close when clicking outside
@@ -28,12 +37,12 @@ function UserDropdown() {
 
 
   // temporary static user
-  const user = {
-    name: "Karan",
-    email: "karan@iperitus.com",
-    role: "ADMIN"
+  // const user = {
+  //   name: "Karan",
+  //   email: "karan@iperitus.com",
+  //   role: "ADMIN"
 
-  };
+  // };
 
   const today = new Date();
 
@@ -43,6 +52,13 @@ function UserDropdown() {
     month: "short",
     year: "numeric"
   });
+
+
+  const displayName = user?.name || "User";
+  const displayEmail = user?.email || "";
+  const displayRole = user?.role?.toUpperCase() || "EMPLOYEE";
+
+
 
 
   return (
@@ -92,11 +108,17 @@ function UserDropdown() {
           <div className="p-3">
 
             <div className="text-sm font-medium">
-              {user.name}
+              {/* {user.name} */}
+              {displayName}
             </div>
 
             <div className="text-xs opacity-70">
-              {user.email}
+              {/* {user.email} */}
+              {displayEmail}
+            </div>
+
+            <div className="text-xs opacity-50 mt-0.5">
+              {displayRole}
             </div>
           </div>
 
@@ -142,6 +164,7 @@ function UserDropdown() {
           {/* logout */}
 
           <button
+            onClick={handleLogout}
             className="
               w-full
 

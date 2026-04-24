@@ -1,6 +1,6 @@
 import { Plus } from "lucide-react"
 import { useState, useEffect } from "react"
-import { fetchRequests, createRequest } from "../services/requestsService"
+import { fetchRequests, createRequest, updateRequest, deleteRequest } from "../services/requestsService"
 
 import BreadCrumb from './../ui/BreadCrumb';
 import DataTable from "../ui/DataTable";
@@ -19,6 +19,8 @@ function Requests() {
   const [showPopup, setShowPopup] = useState(false);
   const [data, setData] = useState([]);
   const [typeFilter, setTypeFilter] = useState("All");
+  const [selectedRequest, setSelectedRequest] = useState(null);
+
 
   async function loadRequests() {
     try {
@@ -46,6 +48,33 @@ function Requests() {
         r => r.request_for === typeFilter
       );
 
+
+
+  // function to edit requests
+  function handleEditClick(row) {
+    setSelectedRequest(row);
+    setShowPopup(true);
+  }
+
+  // function to delete requests
+  async function handleDeleteClick(row) {
+
+    const confirmDelete = window.confirm("Are you sure you want to delete this request?");
+
+    if (!confirmDelete) return;
+
+    try {
+      console.log("Deleting ID", row.request_no);
+      await deleteRequest(row.request_no);
+      await loadRequests();
+    } catch (err) {
+      console.error("Delete failed:", err);
+    }
+  }
+
+
+
+  //Useffect to load requests
   useEffect(() => {
     loadRequests();
   }, []);
@@ -154,7 +183,7 @@ function Requests() {
 
           <DataTable
             data={filteredData}
-            columns={RequestTableColumns}
+            columns={RequestTableColumns(handleEditClick, handleDeleteClick)}
             emptyMessage="No requests yet"
           />
 

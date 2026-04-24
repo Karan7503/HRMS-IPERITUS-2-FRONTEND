@@ -2,15 +2,15 @@ import { useState } from "react";
 
 function WelcomeCard({ name = "Karan", role = "admin" }) {
 
-  const [photo,setPhoto] = useState(null);
+  const [photo, setPhoto] = useState(null);
 
   const today = new Date().toLocaleDateString(
     "en-IN",
     {
-      weekday:"long",
-      day:"numeric",
-      month:"long",
-      year:"numeric"
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric"
     }
   );
 
@@ -18,7 +18,7 @@ function WelcomeCard({ name = "Karan", role = "admin" }) {
 
     const file = e.target.files[0];
 
-    if(file){
+    if (file) {
 
       setPhoto(URL.createObjectURL(file));
 
@@ -26,23 +26,21 @@ function WelcomeCard({ name = "Karan", role = "admin" }) {
 
   };
 
-  return(
+  return (
 
     <div
       className="
-        bg-primary
-        text-white
+  bg-primaryGradient
+  text-white
 
-        rounded-2xl
+  rounded-2xl
+  p-6
 
-        p-6
+  flex items-center justify-between
 
-        flex
-        items-center
-        justify-between
-
-        shadow-md
-      "
+  shadow-md
+  shadow-[0_0_20px_rgba(var(--primary),0.25)]
+"
     >
 
       {/* LEFT */}
@@ -104,7 +102,7 @@ function WelcomeCard({ name = "Karan", role = "admin" }) {
         >
 
           {photo
-            ? <img src={photo} className="w-full h-full object-cover"/>
+            ? <img src={photo} className="w-full h-full object-cover" />
             : <span className="text-xl font-semibold">{name.charAt(0)}</span>
           }
 

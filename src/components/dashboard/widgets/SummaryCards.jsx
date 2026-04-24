@@ -1,25 +1,25 @@
-function SummaryCards(){
+function SummaryCards() {
 
   const cards = [
 
     {
-      title:"Present Today",
-      value:"12"
+      title: "Present Today",
+      value: "12"
     },
 
     {
-      title:"Absent Today",
-      value:"3"
+      title: "Absent Today",
+      value: "3"
     },
 
     {
-      title:"Avg Attendance %",
-      value:"92%"
+      title: "Avg Attendance %",
+      value: "92%"
     }
 
   ];
 
-  return(
+  return (
 
     <div
       className="
@@ -30,7 +30,7 @@ function SummaryCards(){
       "
     >
 
-      {cards.map((c,i)=>(
+      {cards.map((c, i) => (
 
         <div
           key={i}

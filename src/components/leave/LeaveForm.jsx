@@ -57,7 +57,7 @@ function LeaveForm({ onSubmit }) {
 
     return (
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-5 text-black">
 
             {/* LEAVE TYPE */}
 

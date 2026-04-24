@@ -22,7 +22,7 @@ function AttendanceTable({ data = [] }) {
     // }
 
     if (row.status === "Weekly Off") {
-      rowClass = "bg-blue-50";
+      rowClass = "bg-primarySoft";
     }
 
     return {

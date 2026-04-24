@@ -1,32 +1,3 @@
-// const API = "http://localhost:5000";
-
-// export async function fetchRequests() {
-//   const res = await fetch(`${API}/requests`);
-
-//   if (!res.ok) {
-//     throw new Error("requests fetch failed");
-//   }
-
-//   return res.json();
-// }
-
-// export async function createRequest(data) {
-//   const res = await fetch(`${API}/requests`, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json"
-//     },
-//     body: JSON.stringify(data)
-//   });
-
-//   if (!res.ok) {
-//     throw new Error("failed to create request");
-//   }
-
-//   return res.json();
-// }
-
-
 export async function fetchRequests() {
   const res = await fetch("http://localhost:5000/requests");
   return res.json();
@@ -39,6 +10,27 @@ export async function createRequest(payload) {
       "Content-Type": "application/json"
     },
     body: JSON.stringify(payload)
+  });
+
+  return res.json();
+}
+
+
+export async function updateRequest(id, payload) {
+  const res = await fetch(`http://localhost:5000/requests/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  });
+
+  return res.json();
+}
+
+export async function deleteRequest(id) {
+  const res = await fetch(`http://localhost:5000/requests/${id}`, {
+    method: "DELETE"
   });
 
   return res.json();
