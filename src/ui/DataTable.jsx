@@ -30,17 +30,29 @@ function DataTable({
               {headerGroup.headers.map(header => (
                 <th
                   key={header.id}
+                  // className="
+                  //   sticky
+                  //   top-[64px]
+                  //   z-30
+                  //   bg-tableHeader
+                  //   px-2 py-5
+                  //   text-sm
+                  //   text-left
+                  //   font-semibold
+                  //   tracking-wide
+                  //   text-muted
+                  // ">
+
                   className="
                     sticky
                     top-[64px]
                     z-30
                     bg-tableHeader
                     px-2 py-5
-                    text-sm
+
+                    font-medium
+                    text-textMain
                     text-left
-                    font-semibold
-                    tracking-wide
-                    text-muted
                   ">
 
                   {flexRender(

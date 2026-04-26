@@ -19,19 +19,39 @@ function BreadCrumb({ items = [] }) {
               <Link
                 to={item.path}
                 className="
-                  font-medium
-                  hover:text-primary
+                  px-2 py-5
+
+                    font-bold
+                    tracking-tight
+              
+                    text-md
                   transition-colors
-                "
-              >
+                  hover:text-primary
+
+
+                ">
+              {/* //    className="
+              //     font-medium
+              //     hover:text-primary
+              //     transition-colors
+              //   "> */}
+              
                 {item.label}
               </Link>
 
             ) : (
 
-              <span className="font-medium text-textMain">
+              <span className="   px-2 py-5
+
+                    font-bold
+                    tracking-tight
+                    
+                    text-md">
                 {item.label}
               </span>
+              // <span className="font-medium text-textMain">
+              //   {item.label}
+              // </span>
 
             )}
 

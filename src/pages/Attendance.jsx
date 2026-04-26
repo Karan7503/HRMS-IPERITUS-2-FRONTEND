@@ -5,7 +5,7 @@ import { fetchAttendance } from "../services/attendanceService";
 
 import GetAttendance from "../components/attendance/GetAttendance";
 import AttendanceStats from "../components/attendance/AttendanceStats";
-import AttendanceLegend from "../components/attendance/AttendanceLegend";
+import {AttendanceLegend} from "../components/attendance/AttendanceLegend";
 
 import Breadcrumb from "../ui/BreadCrumb";
 import AttendanceTable from "../components/attendance/AttendanceTable";
@@ -111,18 +111,14 @@ function Attendance() {
       <div className="flex items-center justify-between">
 
         <h1
-          className="
-          text-xl
-          sm:text-2xl
-          font-semibold
-          text-textMain
-        ">
+          // className=" text-xl sm:text-2xl font-semibold text-textMain">
+          className=" text-3xl font-black text-textMain  tracking-tight">
           Attendance
         </h1>
 
         {/* FILTER BUTTON */}
 
-        <div className="relative" ref={popupRef}>
+        {/* <div className="relative" ref={popupRef}>
 
           <button
             onClick={() => setShowPopup(!showPopup)}
@@ -135,7 +131,27 @@ function Attendance() {
             "
           >
             <SlidersHorizontal size={18} />
-          </button>
+          </button> */}
+
+          <div className="relative" ref={popupRef}>
+            <button
+              onClick={() => setShowPopup(!showPopup)}
+              className="
+                btn-modern
+                p-3
+                rounded-xl
+                
+                bg-bgCard
+                hover:bg-primarySoft
+
+                flex items-center gap-2
+                text-textMain
+                shadow-md
+              "
+            >
+              <SlidersHorizontal size={20} />
+              <span className="hidden sm:inline font-bold text-xs uppercase tracking-widest">Filters</span>
+            </button>
 
 
           {/* FILTER POPUP */}

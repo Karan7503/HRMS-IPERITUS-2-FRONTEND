@@ -17,6 +17,7 @@ function NavItem({ label, path, items }) {
     border-b
     border-primary
     text-primary
+    
   `;
 
   const isActive =
@@ -41,7 +42,7 @@ function NavItem({ label, path, items }) {
   // normal link
   return (
     <Link to={path} className={className}>
-      {label}
+        {label} 
     </Link>
   );
 }

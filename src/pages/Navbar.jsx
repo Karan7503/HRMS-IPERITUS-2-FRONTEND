@@ -27,6 +27,7 @@ function Navbar() {
             items-center
             justify-between
             shadow-sm
+            
         ">
 
             <Logo />
@@ -37,6 +38,8 @@ function Navbar() {
                     items-center
                     gap-8
                     text-textMain
+                    
+
                 ">
 
                     <NavItem
