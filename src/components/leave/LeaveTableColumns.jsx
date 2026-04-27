@@ -1,6 +1,23 @@
-import { Pencil, Trash2 } from "lucide-react";
+import { Pencil, Trash2, Clock, CheckCircle, XCircle } from "lucide-react";
+
+const requestStatusConfig = {
+    Approved: {
+        color: "rgba(34,197,94,1)",
+        icon: CheckCircle,
+    },
+    Pending: {
+        color: "rgba(245,158,11,1)",
+        icon: Clock,
+    },
+    Rejected: {
+        color: "rgba(239,68,68,1)",
+        icon: XCircle,
+    },
+};
 
 
+
+// Main Table Columns
 const LeaveTableColumns = (onEdit, onDelete) => [
 
     // {
@@ -26,61 +43,6 @@ const LeaveTableColumns = (onEdit, onDelete) => [
 
 
 
-    // {
-    //     accessorKey: "leaveType",
-    //     header: "Type"
-    // },
-
-    // {
-    //     accessorKey: "fromDate",
-    //     header: "From"
-    // },
-
-    // {
-    //     accessorKey: "toDate",
-    //     header: "To"
-    // },
-
-    // {
-    //     accessorKey: "days",
-    //     header: "Days"
-    // },
-
-    // {
-    //     accessorKey: "status",
-
-    //     header: "Status",
-
-    //     cell: ({ row }) => {
-
-    //         const status = row.original.status;
-
-    //         const style =
-    //             status === "Approved"
-    //                 ? "badge-success"
-    //                 : status === "Pending"
-    //                     ? "badge-warning"
-    //                     : "badge-danger";
-
-    //         return (
-
-    //             <span className={`
-    //             px-2
-    //             py-1
-    //             text-xs
-    //             rounded-full
-    //             ${style}
-    //         `}>
-
-    //                 {status}
-
-    //             </span>
-
-    //         );
-
-    //     }
-
-    // },
 
     // 1. Type column
     {
@@ -124,26 +86,47 @@ const LeaveTableColumns = (onEdit, onDelete) => [
     },
     // 5. Status (important)
     {
+
         accessorKey: "status",
         header: () => <div className="text-center">Status</div>,
         cell: ({ row }) => {
-            const status = row.original.status;
+            const status = row.original.status; // ✅ FIXED
 
-            const style =
-                status === "Approved"
-                    ? "badge-success"
-                    : status === "Pending"
-                        ? "badge-warning"
-                        : "badge-danger";
+            const config = requestStatusConfig[status];
+
+            if (!config) return <div className="text-center">-</div>;
+
+            const Icon = config.icon;
 
             return (
                 <div className="flex justify-center">
-                    <span className={`px-2 py-1 text-xs rounded-full ${style}`}>
-                        {status}
-                    </span>
+                    <div
+                        className="flex items-center gap-2 px-3 py-1.5 rounded-xl border shadow-sm"
+                        style={{
+                            backgroundColor: config.color.replace("1)", "0.12)"),
+                            borderColor: config.color.replace("1)", "0.35)"),
+                        }}
+                    >
+                        <div
+                            className="p-1 rounded-lg"
+                            style={{
+                                backgroundColor: config.color.replace("1)", "0.15)")
+                            }}
+                        >
+                            <Icon size={12} color={config.color} />
+                        </div>
+
+                        <span
+                            className="text-[10px] font-black uppercase tracking-widest"
+                            style={{ color: config.color }}
+                        >
+                            {status}
+                        </span>
+                    </div>
                 </div>
             );
         }
+
     },
 
 

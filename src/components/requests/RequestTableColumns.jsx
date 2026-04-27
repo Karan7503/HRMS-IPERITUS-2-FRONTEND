@@ -1,5 +1,45 @@
-import { Pencil, Trash2 } from "lucide-react";
+import { Pencil, Trash2, CheckCircle, Clock, XCircle, Circle, CheckCircle2 } from "lucide-react";
 
+const requestStatusConfig = {
+  Approved: {
+    color: "rgba(34,197,94,1)",
+    icon: CheckCircle,
+  },
+  Pending: {
+    color: "rgba(245,158,11,1)",
+    icon: Clock,
+  },
+  Rejected: {
+    color: "rgba(239,68,68,1)",
+    icon: XCircle,
+  },
+};
+
+const userStatusConfig = {
+  Open: {
+    color: "rgba(168,85,247,1)", // purple
+    icon: Circle,
+  },
+  Closed: {
+    color: "rgba(34,197,94,1)", // green
+    icon: CheckCircle2,
+  },
+};
+
+const activeConfig = {
+  true: {
+    label: "Yes",
+    color: "rgba(34,197,94,1)", // green
+    icon: CheckCircle,
+  },
+  false: {
+    label: "No",
+    color: "rgba(156,163,175,1)", // gray
+    icon: XCircle,
+  },
+};
+
+//Main Table Columns
 const RequestTableColumns = (onEdit, onDelete) => [
 
   {
@@ -47,24 +87,42 @@ const RequestTableColumns = (onEdit, onDelete) => [
       </div>
     ),
     size: 160,
-    cell: ({ row }) => (
-      <div className="flex justify-center">
-        <span
-          className="
-            min-w-[95px]
-            px-2 py-1
-            text-sm
-            font-medium
-            rounded-full
-            text-center
-            bg-primarySoft
-            text-primary
-          "
-        >
-          {row.original.user_status}
-        </span>
-      </div>
-    )
+    cell: ({ row }) => {
+      const status = row.original.user_status;
+      const config = userStatusConfig[status];
+
+      if (!config) return <div className="text-center">-</div>;
+
+      const Icon = config.icon;
+
+      return (
+        <div className="flex justify-center">
+          <div
+            className="flex items-center gap-2 px-3 py-1.5 rounded-xl border shadow-sm"
+            style={{
+              backgroundColor: config.color.replace("1)", "0.12)"),
+              borderColor: config.color.replace("1)", "0.35)"),
+            }}
+          >
+            <div
+              className="p-1 rounded-lg"
+              style={{
+                backgroundColor: config.color.replace("1)", "0.15)")
+              }}
+            >
+              <Icon size={12} color={config.color} />
+            </div>
+
+            <span
+              className="text-[10px] font-black uppercase tracking-widest"
+              style={{ color: config.color }}
+            >
+              {status}
+            </span>
+          </div>
+        </div>
+      );
+    }
   },
 
   {
@@ -114,24 +172,46 @@ const RequestTableColumns = (onEdit, onDelete) => [
     size: 130,
     cell: ({ row }) => {
       const status = row.original.request_status;
-      const badgeClass =
-        status === "Approved" ? "badge-success" : "badge-warning";
+
+      const config = requestStatusConfig[status];
+
+      if (!config) return <div className="text-center">-</div>;
+
+      const Icon = config.icon;
 
       return (
         <div className="flex justify-center">
-          <span
-            className={`
-              min-w-[95px]
-              px-2 py-1
-              text-xs
-              font-medium
-              rounded-full
-              text-center
-              ${badgeClass}
-            `}
+          <div
+            className="
+              flex items-center gap-2 
+              px-3 py-1.5
+              rounded-xl 
+              border
+              shadow-sm
+            "
+            style={{
+              backgroundColor: config.color.replace("1)", "0.12)"),
+              borderColor: config.color.replace("1)", "0.35)"),
+            }}
           >
-            {status}
-          </span>
+            {/* Icon */}
+            <div
+              className="p-1 rounded-lg"
+              style={{
+                backgroundColor: config.color.replace("1)", "0.15)")
+              }}
+            >
+              <Icon size={12} color={config.color} />
+            </div>
+
+            {/* Label */}
+            <span
+              className="text-[10px] font-black uppercase tracking-widest"
+              style={{ color: config.color }}
+            >
+              {status}
+            </span>
+          </div>
         </div>
       );
     }
@@ -145,25 +225,42 @@ const RequestTableColumns = (onEdit, onDelete) => [
       </div>
     ),
     size: 120,
-    cell: ({ row }) => (
-      <div className="flex justify-center">
-        <span
-          className={`
-            min-w-[70px]
-            px-2 py-1
-            text-xs
-            font-medium
-            rounded-full
-            text-center
-            ${row.original.active
-              ? "badge-success"
-              : "badge-neutral"}
-          `}
-        >
-          {row.original.active ? "Yes" : "No"}
-        </span>
-      </div>
-    )
+    cell: ({ row }) => {
+      const value = row.original.active;
+      const config = activeConfig[value];
+
+      if (!config) return <div className="text-center">-</div>;
+
+      const Icon = config.icon;
+
+      return (
+        <div className="flex justify-center">
+          <div
+            className="flex items-center gap-2 px-3 py-1.5 rounded-xl border shadow-sm"
+            style={{
+              backgroundColor: config.color.replace("1)", "0.12)"),
+              borderColor: config.color.replace("1)", "0.35)"),
+            }}
+          >
+            <div
+              className="p-1 rounded-lg"
+              style={{
+                backgroundColor: config.color.replace("1)", "0.15)")
+              }}
+            >
+              <Icon size={12} color={config.color} />
+            </div>
+
+            <span
+              className="text-[10px] font-black uppercase tracking-widest"
+              style={{ color: config.color }}
+            >
+              {config.label}
+            </span>
+          </div>
+        </div>
+      );
+    }
   },
 
   {

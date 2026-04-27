@@ -2,7 +2,7 @@ export {default as SummaryCards}  from "./widgets/SummaryCards";
 
 export { default as WelcomeCard } from "./widgets/WelcomeCard";
 export { default as QuickActions } from "./widgets/QuickActions";
-export { default as AttendanceStats } from "./widgets/AttendanceStats";
+export { default as AttendanceStats } from "../attendance/AttendanceStats";
 export { default as LeaveBalance } from "./widgets/LeaveBalance";
 export { default as TodoWidget } from "./widgets/TodoWidget";
 export { default as PayslipWidget } from "./widgets/PayslipWidget";

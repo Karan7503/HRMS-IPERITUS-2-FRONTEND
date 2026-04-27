@@ -2,18 +2,19 @@ import { useState } from "react";
 import {
   WelcomeCard,
   QuickActions,
-  SummaryCards
+  SummaryCards,
+  AttendanceStats
 } from "../components/dashboard";
 
 
-function Dashboard(){
+function Dashboard() {
 
   const [filters, setFilters] = useState({
     start: "",
     end: ""
   });
 
-  return(
+  return (
 
     <div
       className="
@@ -26,9 +27,13 @@ function Dashboard(){
 
       <WelcomeCard />
 
+      <AttendanceStats filters={filters} />
+
       {/* <QuickActions /> */}
 
       {/* <SummaryCards /> */}
+
+
 
     </div>
 
