@@ -6,25 +6,19 @@ import "react-datepicker/dist/react-datepicker.css";
 function DateInput({
   label,
   selected,
-  onChange
+  onChange,
+  className = ""
 }) {
 
   return (
 
     <div className="flex flex-col w-full">
 
-      <label
-        className="
-          text-sm
-          text-textMain
-          opacity-70
-          mb-1
-        "
-      >
-
-        {label}
-
-      </label>
+      {label && (
+        <label className="form-label">
+          {label}
+        </label>
+      )}
 
 
       <div className="relative w-full">
@@ -43,25 +37,7 @@ function DateInput({
 
           popperClassName="z-[9999]"
 
-          className="
-            w-full
-
-            h-[36px]
-
-            pl-3 pr-9
-
-            text-sm
-
-            bg-bgMain
-            text-textMain
-
-            border border-strong
-
-            rounded-md
-
-            focus:outline-none
-            focus:border-primary
-          "
+          className={`input h-[48px] pl-4 pr-10 font-bold tracking-tight ${className}`}
         />
 
 

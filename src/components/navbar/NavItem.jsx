@@ -10,7 +10,8 @@ function NavItem({ label, path, items }) {
     px-1
     pb-1
     cursor-pointer
-    font-normal
+    font-medium
+    tracking-tight
   `;
 
   const activeStyle = `

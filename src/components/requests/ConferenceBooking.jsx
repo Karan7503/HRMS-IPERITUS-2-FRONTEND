@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Plus } from "lucide-react";
 
 import BreadCrumb from "../../ui/BreadCrumb";
 
@@ -139,7 +140,7 @@ function ConferenceBooking() {
 
     return (
 
-        <div className="bg-bgMain min-h-screen responsive-page space-y-6">
+        <div className="bg-bgMain min-h-screen px-4 sm:px-6 lg:px-10 xl:px-16 py-4 space-y-6">
 
 
             {/* breadcrumb */}
@@ -160,12 +161,32 @@ function ConferenceBooking() {
 
 
             {/* title */}
+            <div className="flex items-center justify-between mt-6">
+                <div>
+                    <h1 className="text-3xl font-extrabold text-textMain tracking-tighter">
+                        Conference Booking
+                    </h1>
 
-            <h1 className="text-xl sm:text-2xl font-semibold text-textMain">
+                </div>
 
-                Conference Booking
-
-            </h1>
+                <button
+                    onClick={() => setShowPopup(true)}
+                    className="
+                        p-3
+                        px-6
+                        rounded-full
+                        bg-bgCard
+                        hover:bg-primarySoft
+                        flex items-center gap-2
+                        text-textMain
+                        shadow-md
+                        transition-all
+                    "
+                >
+                    <Plus size={20} />
+                    <span className="hidden sm:inline font-bold text-xs uppercase tracking-widest">Add Conference</span>
+                </button>
+            </div>
 
 
             <div className="border-b border-strong" />
@@ -197,7 +218,7 @@ function ConferenceBooking() {
 
             {/* calendar + stats */}
 
-            <div className="responsive-grid">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-6">
 
                 <ConferenceCalendar
 

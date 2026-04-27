@@ -1,5 +1,6 @@
-import { Plus } from "lucide-react"
+import { Plus, Calendar } from "lucide-react"
 import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import { fetchRequests, createRequest, updateRequest, deleteRequest } from "../services/requestsService"
 
 import BreadCrumb from './../ui/BreadCrumb';
@@ -20,6 +21,7 @@ function Requests() {
   const [data, setData] = useState([]);
   const [typeFilter, setTypeFilter] = useState("All");
   const [selectedRequest, setSelectedRequest] = useState(null);
+  const navigate = useNavigate();
 
 
   async function loadRequests() {
@@ -104,32 +106,45 @@ function Requests() {
 
       <div className="flex items-center justify-between ">
 
-        <h1 className="
-          text-xl
-          sm:text-2xl
-          font-semibold
-          text-textMain
-          ">
-          My Requests
+        <h1 className="text-3xl font-black text-textMain tracking-tight">
+          Requests
         </h1>
 
-        <div className="relative">
+        <div className="flex items-center gap-3">
           {/* <div className="w-[120px] flex justify-end"> */}
 
           <button
-            onClick={() => setShowPopup(true)}
-            title="Add Request"
+            onClick={() => navigate("/conference")}
             className="
-              p-2
-              rounded-md
-              border border-strong
+              p-3
+              rounded-xl
               bg-bgCard
               hover:bg-primarySoft
-              hover:text-primary
-              transition
-              cursor-pointer
-          ">
-            <Plus size={18} />
+              flex items-center gap-2
+              text-textMain
+              shadow-md
+              transition-all
+            "
+          >
+            <Calendar size={20} />
+            <span className="hidden sm:inline font-bold text-xs uppercase tracking-widest">Book Conference</span>
+          </button>
+
+          <button
+            onClick={() => setShowPopup(true)}
+            className="
+              p-3
+              rounded-xl
+              bg-bgCard
+              hover:bg-primarySoft
+              flex items-center gap-2
+              text-textMain
+              shadow-md
+              transition-all
+            "
+          >
+            <Plus size={20} />
+            <span className="hidden sm:inline font-bold text-xs uppercase tracking-widest">Add Request</span>
           </button>
 
         </div>

@@ -50,9 +50,10 @@ function DataTable({
                     bg-tableHeader
                     px-2 py-5
 
-                    font-medium
+                    font-semibold
                     text-textMain
                     text-left
+                    tracking-tight
                   ">
 
                   {flexRender(
@@ -96,6 +97,9 @@ function DataTable({
                     className="
                       px-2 py-4
                       text-sm
+                      font-medium
+                      text-textMain
+                      tracking-tight
                     "
                   >
 
@@ -123,7 +127,9 @@ function DataTable({
                   text-center
                   py-10
 
+                  font-medium
                   text-muted
+                  tracking-tight
                 "
               >
 

@@ -1,4 +1,5 @@
 import DateInput from "../../ui/DateInput";
+import CustomSelect from "../../ui/CustomSelect";
 
 
 function ConferenceFilter({
@@ -10,42 +11,28 @@ function ConferenceFilter({
 
     return (
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
 
             {/* ROOM */}
-
-            <select
-                value={room}
-                onChange={(e) => setRoom(e.target.value)}
-                className="
-                    h-[37px]
-                    mt-1.25
-                    px-3
-
-                    text-sm
-                    bg-bgCard
-                    text-textMain
-
-                    border border-strong
-                    rounded-md
-
-                    hover:bg-primarySoft
-                    focus:outline-none
-            ">
-
-                <option value="Room A">Room A</option>
-                <option value="Room B">Room B</option>
-                <option value="Room C">Room C</option>
-
-            </select>
+            <div className="w-[190px]">
+                <CustomSelect
+                    label=""
+                    value={room}
+                    onChange={(e) => setRoom(e.target.value)}
+                    options={["Room A", "Room B", "Room C"]}
+                    placeholder="Select Room"
+                    className="rounded-full px-8"
+                />
+            </div>
 
 
             {/* DATE */}
-            <div className="w-[170px]">
+            <div className="w-[190px]">
                 <DateInput
                     label=""
-                    selected={date}
-                    onChange={(date) => setDate(date.toISOString().split("T")[0])}
+                    selected={date ? new Date(date) : null}
+                    onChange={(d) => setDate(d ? d.toISOString().split("T")[0] : null)}
+                    className="rounded-full pl-8"
                 />
             </div>
 

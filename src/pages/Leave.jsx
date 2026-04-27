@@ -117,12 +117,7 @@ function Leave() {
 
       <div className="flex items-center justify-between">
 
-        <h1 className="
-          text-xl
-          sm:text-2xl
-          font-semibold
-          text-textMain
-        ">
+        <h1 className="text-3xl font-black text-textMain tracking-tight">
           Leave
         </h1>
 
@@ -130,14 +125,18 @@ function Leave() {
         <button
           onClick={() => setShowPopup(true)}
           className="
-            p-2
-            rounded-md
-            border border-strong
+            p-3
+            rounded-xl
             bg-bgCard
             hover:bg-primarySoft
+            flex items-center gap-2
+            text-textMain
+            shadow-md
+            transition-all
           "
         >
-          <Plus size={18} />
+          <Plus size={20} />
+          <span className="hidden sm:inline font-bold text-xs uppercase tracking-widest">Apply Leave</span>
         </button>
 
       </div>

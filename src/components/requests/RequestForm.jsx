@@ -1,5 +1,6 @@
 import { useState } from "react";
 import DateInput from "../../ui/DateInput";
+import CustomSelect from "../../ui/CustomSelect";
 import { useNavigate } from "react-router-dom";
 
 
@@ -17,7 +18,7 @@ function RequestForm({ onSubmit }) {
     close_date: "",
     actual_close_date: "",
 
-    user_status: "Open",
+    user_status: "",
     request_status: "",
 
     active: true,
@@ -71,28 +72,22 @@ function RequestForm({ onSubmit }) {
 
       {/* REQUEST TYPE */}
 
-      <Field label="Request Type">
-
-        <select
-          name="request_for"
-          value={form.request_for}
-          onChange={handleChange}
-          className="input"
-          required
-        >
-
-          <option value="">Select type</option>
-
-          <option>Stationary</option>
-          <option>IT</option>
-          <option>Fault</option>
-          <option>Library</option>
-          <option>Leave</option>
-          <option>Conference</option>
-
-        </select>
-
-      </Field>
+      <CustomSelect
+        label="Request Type"
+        name="request_for"
+        value={form.request_for}
+        onChange={handleChange}
+        options={[
+          "Stationary",
+          "IT",
+          "Fault",
+          "Library",
+          "Leave",
+          "Conference"
+        ]}
+        placeholder="Select request category"
+        required
+      />
 
       {/* SUBJECT */}
       <Field label="Subject">
@@ -101,7 +96,7 @@ function RequestForm({ onSubmit }) {
           name="subject"
           value={form.subject}
           onChange={handleChange}
-          placeholder="Short description"
+          placeholder="Enter a brief subject..."
           className="input"
           required
         />
@@ -115,8 +110,8 @@ function RequestForm({ onSubmit }) {
           name="comments"
           value={form.comments}
           onChange={handleChange}
-          placeholder="Write details..."
-          className="input min-h-[90px]"
+          placeholder="Provide detailed information about your request..."
+          className="input min-h-[110px]"
         />
 
       </Field>
@@ -174,22 +169,14 @@ function RequestForm({ onSubmit }) {
 
       <Grid2>
 
-        <Field label="User Status">
-
-          <select
-            name="user_status"
-            value={form.user_status}
-            onChange={handleChange}
-            className="input"
-          >
-
-            <option>Open</option>
-            <option>In Progress</option>
-            <option>Closed</option>
-
-          </select>
-
-        </Field>
+        <CustomSelect
+          label="User Status"
+          name="user_status"
+          value={form.user_status}
+          onChange={handleChange}
+          options={["Open", "In Progress", "Closed"]}
+          placeholder="Select status"
+        />
 
 
         <Field label="Request Status">
@@ -198,7 +185,7 @@ function RequestForm({ onSubmit }) {
             name="request_status"
             value={form.request_status}
             onChange={handleChange}
-            placeholder="Internal status"
+            placeholder="Internal reference status"
             className="input"
           />
 
@@ -207,24 +194,14 @@ function RequestForm({ onSubmit }) {
       </Grid2>
 
 
-      <Field label="Report To">
-
-        <select
-          name="report_to"
-          value={form.report_to}
-          onChange={handleChange}
-          className="input"
-        >
-
-          <option value="">Select user</option>
-
-          <option>Admin</option>
-          <option>Manager</option>
-          <option>HR</option>
-
-        </select>
-
-      </Field>
+      <CustomSelect
+        label="Report To"
+        name="report_to"
+        value={form.report_to}
+        onChange={handleChange}
+        options={["Admin", "Manager", "HR"]}
+        placeholder="Select recipient"
+      />
 
 
       {/* ACTIVE */}
@@ -247,12 +224,7 @@ function RequestForm({ onSubmit }) {
 
       {/* SUBMIT */}
 
-      <button
-        className="
-        btn-primary
-        w-full
-        mt-2
-      ">
+      <button className="btn-primary w-full h-[48px] mt-4">
         Add Request
       </button>
 
@@ -271,15 +243,8 @@ function Field({ label, children }) {
 
     <div>
 
-      <label className="
-      text-sm
-      text-muted
-      block
-      mb-1
-      ">
-
+      <label className="form-label">
         {label}
-
       </label>
 
       {children}
@@ -297,7 +262,7 @@ function Grid2({ children }) {
 
   return (
 
-    <div className="grid grid-cols-2 gap-3">
+    <div className="grid grid-cols-2 gap-4">
       {children}
     </div>
 
@@ -312,13 +277,7 @@ function SectionTitle({ children }) {
 
   return (
 
-    <p className="
-      text-xs
-      uppercase
-      tracking-wide
-      text-muted
-      pt-2
-    ">
+    <p className="form-section-title">
       {children}
     </p>
 

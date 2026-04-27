@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-function WelcomeCard({ name = "Karan", role = "admin" }) {
+function WelcomeCard({ name = "Karan", role = "Employee" }) {
 
   const [photo, setPhoto] = useState(null);
 
@@ -30,17 +30,20 @@ function WelcomeCard({ name = "Karan", role = "admin" }) {
   return (
 
     <div
+      style={{
+        backgroundColor: "var(--welcome-bg)",
+        boxShadow: "var(--welcome-shadow)",
+        borderColor: "var(--welcome-border)"
+      }}
       className="
-
-        rounded-2xl
-        p-6
-
+        rounded-[2rem]
+        p-8
         flex items-center justify-between
-
-        shadow-md
-        shadow-[0_0_20px_rgba(var(--primary),0.25)]
-    "
+        border
+        relative overflow-hidden
+      "
     >
+
 
       {/* LEFT */}
       <div className="flex flex-col gap-2 ">
@@ -52,29 +55,18 @@ function WelcomeCard({ name = "Karan", role = "admin" }) {
         <motion.h2
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.1,
-            ease: "easeOut"
-          }}
-          whileHover={{
-            letterSpacing: "0.5px",
-            opacity: 0.9
-          }}
-          className="
-        text-2xl 
-        font-bold 
-        text-textMain
-        transition-all duration-300
-  "
+          transition={{ duration: 0.1, ease: "easeOut" }}
+          whileHover={{ letterSpacing: "0.5px", opacity: 0.9 }}
+          className="text-[1.75rem] font-extrabold text-textMain tracking-tighter transition-all duration-300"
         >
           Welcome back
         </motion.h2>
 
-        <p className="text-textMain font-bold mt-1 text-lg">
+        <p className="text-textMain font-bold mt-1 text-xl tracking-tight">
           {name}
         </p>
 
-        <p className="text-textMain font-normal text-lg">
+        <p className="text-textMain font-medium text-lg tracking-tight opacity-80">
           {today}
         </p>
 
@@ -96,7 +88,6 @@ function WelcomeCard({ name = "Karan", role = "admin" }) {
         ">
 
           {role.toUpperCase()}
-
         </span>
 
       </div>

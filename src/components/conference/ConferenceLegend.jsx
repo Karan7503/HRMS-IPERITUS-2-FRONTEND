@@ -1,47 +1,26 @@
-function LegendItem({ label, color }) {
+import { CheckCircle, XCircle, Clock } from "lucide-react";
 
-    return (
-
-        <div className="flex items-center gap-2">
-
-            <span
-                className="w-3 h-3 rounded-full"
-                style={{ backgroundColor: color }}
-            />
-
-            <span className="text-sm text-muted">
-                {label}
-            </span>
-
-        </div>
-
-    );
-
+function LegendItem({ label, style, icon: Icon }) {
+  return (
+    <div
+      className={`flex items-center gap-2 px-4 py-2 rounded-xl ${style} border border-white/5 shadow-sm transition-all duration-300 hover:scale-105 cursor-default`}
+    >
+      <div className="p-1 rounded-lg bg-white/20">
+        <Icon size={12} />
+      </div>
+      <span className="text-[10px] font-black uppercase tracking-widest text-textMain/80">
+        {label}
+      </span>
+    </div>
+  );
 }
 
 export default function ConferenceLegend() {
-
-    return (
-
-        <div className="flex flex-wrap gap-5">
-
-            <LegendItem
-                label="Available"
-                color="rgba(34,197,94,0.5)"
-            />
-
-            <LegendItem
-                label="Booked"
-                color="rgba(239,68,68,0.6)"
-            />
-
-            <LegendItem
-                label="In Progress"
-                color="rgba(245,158,11,0.6)"
-            />
-
-        </div>
-
-    )
-
+  return (
+    <div className="flex flex-wrap gap-3 py-2">
+      <LegendItem label="Available" style="summary-success" icon={CheckCircle} />
+      <LegendItem label="Booked" style="summary-danger" icon={XCircle} />
+      <LegendItem label="In Progress" style="summary-warning" icon={Clock} />
+    </div>
+  );
 }

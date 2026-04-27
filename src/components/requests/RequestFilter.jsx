@@ -41,60 +41,55 @@ function RequestFilter({ value, onChange }) {
 
         <div
             ref={ref}
-            className="flex items-center gap-2 relative"
+            className="flex items-center gap-3 relative"
         >
 
             {/* selected value field */}
 
-            <input
-                readOnly
-                value={value}
+            <div className="relative group">
+                <input
+                    readOnly
+                    value={value}
+                    onClick={() => setOpen(!open)}
+                    className="
+                      w-[150px]
+                      h-[42px]
+                      px-4
+                      text-sm
+                      font-medium
+                      bg-bgCard
+                      text-textMain
+                      border border-strong
+                      rounded-xl
+                      cursor-pointer
+                      focus:outline-none
+                      transition-all
+                      duration-300
+                      tracking-tight
+                      shadow-sm
+                    "
+                />
+            </div>
 
-                className="
-          w-[140px]
-          h-[34px]
 
-          px-3
-
-          text-sm
-
-          bg-bgCard
-          text-textMain
-
-          border border-strong
-
-          rounded-md
-
-          cursor-pointer
-
-          focus:outline-none
-          focus:border-primary
-        "
-            />
-
-
-            {/* filter icon */}
+            {/* filter icon button */}
 
             <button
                 onClick={() => setOpen(!open)}
-
                 className="
-          p-2
-
-          rounded-md
-
-          border border-strong
-
-          bg-bgCard
-
-          hover:bg-primarySoft
-          hover:text-primary
-
-          transition
-        "
+                  p-3
+                  rounded-xl
+                  bg-bgCard
+                  text-textMain
+                  hover:bg-primarySoft
+                  hover:text-primary
+                  transition-all
+                  duration-300
+                  shadow-md
+                "
             >
 
-                <SlidersHorizontal size={16} />
+                <SlidersHorizontal size={20} />
 
             </button>
 
@@ -105,25 +100,18 @@ function RequestFilter({ value, onChange }) {
 
                 <div
                     className="
-            absolute
-
-            right-0
-            top-10
-
-            z-50
-
-            w-[170px]
-
-            bg-bgCard
-
-            border border-strong
-
-            rounded-md
-
-            shadow-sm
-
-            overflow-hidden
-          "
+                        absolute
+                        right-0
+                        top-[50px]
+                        z-[100]
+                        w-[180px]
+                        bg-bgCard
+                        border border-strong
+                        rounded-xl
+                        shadow-xl
+                        overflow-hidden
+                        animate-in fade-in zoom-in-95 duration-200
+                    "
                 >
 
                     {options.map(option => (
@@ -139,20 +127,17 @@ function RequestFilter({ value, onChange }) {
 
                             }}
 
-                            className="
-                px-3 py-2
-
-                text-sm
-
-                cursor-pointer
-
-                text-textMain
-
-                hover:bg-primarySoft
-                hover:text-primary
-
-                transition
-              "
+                            className={`
+                                px-4 py-3
+                                text-sm
+                                font-medium
+                                tracking-tight
+                                cursor-pointer
+                                transition-colors
+                                ${value === option 
+                                    ? "bg-primarySoft text-primary" 
+                                    : "text-textMain hover:bg-bgMain hover:text-primary"}
+                            `}
                         >
 
                             {option}

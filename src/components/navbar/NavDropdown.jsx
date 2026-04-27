@@ -73,6 +73,8 @@ function NavDropdown({ label, items = [], align = "right", className=""}) {
                         px-4
                         py-2
                         text-sm
+                        font-medium
+                        tracking-tight
                         hover:bg-primarySoft
 
                         rounded-md

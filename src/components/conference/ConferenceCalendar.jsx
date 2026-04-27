@@ -85,10 +85,8 @@ function ConferenceCalendar({
 
             <div className="flex items-center justify-between mb-4">
 
-                <h3 className="text-sm font-semibold text-textMain">
-
+                <h3 className="text-lg font-extrabold text-textMain tracking-tighter">
                     Schedule
-
                 </h3>
 
             </div>

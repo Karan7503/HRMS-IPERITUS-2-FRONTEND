@@ -5,6 +5,7 @@ import Attendance from "../pages/Attendance";
 import Leave from "../pages/Leave";
 import Requests from "../pages/Requests";
 import Resume from './../pages/Resume';
+import Data from '../pages/Data';
 import ConferenceBooking from "../components/requests/ConferenceBooking";
 
 
@@ -51,8 +52,7 @@ function AppRoutes() {
 
             <Route
                 path="/data"
-                element={<Attendance />}
-
+                element={<Data />}
             />
 
             <Route

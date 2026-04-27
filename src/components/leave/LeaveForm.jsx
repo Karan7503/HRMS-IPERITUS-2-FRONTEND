@@ -1,5 +1,6 @@
 import { useState } from "react";
 import DateInput from "../../ui/DateInput";
+import CustomSelect from "../../ui/CustomSelect";
 
 
 function LeaveForm({ onSubmit }) {
@@ -61,25 +62,19 @@ function LeaveForm({ onSubmit }) {
 
             {/* LEAVE TYPE */}
 
-            <Field label="Leave Type">
-
-                <select
-                    name="leave_type"
-                    value={form.leave_type}
-                    onChange={handleChange}
-                    className="input"
-                    required
-                >
-
-                    <option value="">Select leave type</option>
-
-                    <option>Casual Leave</option>
-                    <option>Sick Leave</option>
-                    <option>Privilege Leave</option>
-
-                </select>
-
-            </Field>
+            <CustomSelect
+                label="Leave Type"
+                name="leave_type"
+                value={form.leave_type}
+                onChange={handleChange}
+                options={[
+                    "Casual Leave",
+                    "Sick Leave",
+                    "Privilege Leave"
+                ]}
+                placeholder="Choose leave category"
+                required
+            />
 
 
             {/* TIMELINE */}
@@ -127,8 +122,8 @@ function LeaveForm({ onSubmit }) {
                     name="reason"
                     value={form.reason}
                     onChange={handleChange}
-                    placeholder="Write reason..."
-                    className="input min-h-[90px]"
+                    placeholder="Please describe the reason for your leave request..."
+                    className="input min-h-[120px]"
                 />
 
             </Field>
@@ -137,11 +132,7 @@ function LeaveForm({ onSubmit }) {
             {/* SUBMIT */}
 
             <button
-                className="
-          btn-primary
-          w-full
-          mt-2
-        "
+                className="btn-primary w-full h-[48px] mt-4"
             >
 
                 Apply Leave
@@ -163,15 +154,8 @@ function Field({ label, children }) {
 
         <div>
 
-            <label className="
-        text-sm
-        text-muted
-        block
-        mb-1
-      ">
-
+            <label className="form-label">
                 {label}
-
             </label>
 
             {children}
@@ -189,7 +173,7 @@ function Grid2({ children }) {
 
     return (
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-4">
 
             {children}
 
@@ -206,16 +190,8 @@ function SectionTitle({ children }) {
 
     return (
 
-        <p className="
-      text-xs
-      uppercase
-      tracking-wide
-      text-muted
-      pt-2
-    ">
-
+        <p className="form-section-title">
             {children}
-
         </p>
 
     );
